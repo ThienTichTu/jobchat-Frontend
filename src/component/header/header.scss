@@ -1,0 +1,15 @@
+.header {
+    height: 72px;
+    width: 100%;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    padding: 17px 20px;
+    &__bar {
+        font-size: 30px;
+        cursor: pointer;
+    }
+    h3 {
+        padding-left: 15px;
+    }
+}
