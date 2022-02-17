@@ -1,26 +1,34 @@
 import './Navigation.scss'
 import Header from '../header/Header.js'
 import { useState, useRef, useEffect } from 'react'
-export default function Navigation() {
+import { NavLink } from 'react-router-dom'
+export default function Navigation({ handleStay, handleBoo, boo }) {
     const barDom = useRef();
+    const barsub = useRef();
     const [bar, setBar] = useState(false);
     const [stay, setStay] = useState('Trang chủ');
 
     function handleBar() {
         setBar(!bar);
+        handleBoo(bar)
     }
-
+    if (boo !== bar) {
+        setBar(boo);
+    }
 
     useEffect(() => {
         if (bar) {
             barDom.current.style.marginLeft = '-300px';
+
         } else {
             barDom.current.style.marginLeft = '0';
+
         }
     }, [bar])
 
     return (
         <>
+
             <div className="nav__container" ref={barDom}>
                 <div className="nav__title ">
                     <div className="nav__title-logo">
@@ -36,28 +44,35 @@ export default function Navigation() {
 
                 </div>
                 <div>
-                    <div
-                        className="nav__element active"
-                        onClick={() => setStay("Trang chủ")}
+                    <NavLink to="/kanban">
+                        <div
+                            className="nav__element"
+                            onClick={() => handleStay("Trang chủ")}
 
-                    >
-                        <i className="fa-solid fa-house"></i>
-                        <span>    Trang Chủ</span>
-                    </div>
-                    <div
-                        className="nav__element"
-                        onClick={() => setStay("Công việc của tôi")}
-                    >
-                        <i className="fa-solid fa-circle-check"></i>
-                        <span>    Công việc của tôi</span>
-                    </div>
-                    <div
-                        className="nav__element"
-                        onClick={() => setStay(" Tin nhắn")}
-                    >
-                        <i className="fa-solid fa-message"></i>
-                        <span>    Tin nhắn</span>
-                    </div>
+                        >
+                            <i className="fa-solid fa-house"></i>
+                            <span>    Trang Chủ</span>
+                        </div>
+                    </NavLink>
+
+                    <NavLink to="/myjob" >
+                        <div
+                            className="nav__element"
+                            onClick={() => handleStay("Công việc của tôi")}
+                        >
+                            <i className="fa-solid fa-circle-check"></i>
+                            <span>    Công việc của tôi</span>
+                        </div>
+                    </NavLink>
+                    <NavLink to='/chat'>
+                        <div
+                            className="nav__element"
+                            onClick={() => handleStay(" Tin nhắn")}
+                        >
+                            <i className="fa-solid fa-message"></i>
+                            <span>    Tin nhắn</span>
+                        </div>
+                    </NavLink>
                 </div>
 
                 <div className="nav__feature">
@@ -75,11 +90,7 @@ export default function Navigation() {
                     </div>
                 </div>
             </div>
-            <Header
-                handleBar={handleBar}
-                bar={bar}
-                stay={stay}
-            />
+
         </>
     )
 }

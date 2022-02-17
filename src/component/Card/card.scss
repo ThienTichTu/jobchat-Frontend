@@ -1,0 +1,200 @@
+@mixin tag() {
+    margin-top: 10px;
+    margin-right: 5px;
+    span {
+        padding: 5px 10px;
+        display: block;
+        border-radius: 20px;
+        background-color: rgb(200, 58, 58);
+        font-size: 16px;
+        color: #fff;
+    }
+}
+.card {
+    min-height: 200px;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 10px;
+    margin-top: 10px;
+    &-id {
+        display: flex;
+        justify-content: space-between;
+        span {
+            font-size: 14px;
+            font-weight: 700;
+        }
+        i {
+            cursor: pointer;
+            font-size: 14px;
+        }
+    }
+    &-title {
+        margin-top: 10px;
+        span {
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    }
+    &-tag {
+        margin-top: 10px;
+        &-item {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        &-user {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        &-property {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+
+            .property-item {
+                @include tag();
+            }
+            &-detail {
+                margin-top: 10px;
+            }
+        }
+    }
+    &-footer {
+        margin-top: 10px;
+        text-align: end;
+        span {
+            font-weight: bold;
+            color: rgb(28, 119, 5);
+        }
+    }
+}
+
+// Card detail
+
+.card__detail {
+    position: absolute;
+    width: 500px;
+    height: calc(100vh - 72px);
+    right: 0;
+    top: 72px;
+    background-color: rgb(223, 223, 223);
+    z-index: 1000;
+    transition: all 0.4s linear;
+    transform: translateX(500px);
+    padding: 10px;
+    overflow-y: auto;
+    &-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    &-close {
+        i {
+            font-size: 26px;
+            cursor: pointer;
+        }
+    }
+    &-project {
+        .project-name {
+            font-weight: bold;
+        }
+        span {
+            color: rgba(0, 0, 0, 0.555);
+            font-size: 24px;
+        }
+    }
+    &-body {
+        margin-top: 30px;
+    }
+    &-listuser {
+        margin-top: 10px;
+        &-item {
+            display: inline-block;
+            padding-right: 30px;
+            margin-top: 10px;
+            color: #6392cc;
+            i {
+                margin-right: 10px;
+            }
+            span {
+                cursor: pointer;
+                font-size: 18px;
+            }
+        }
+    }
+    &-property {
+        display: flex;
+        margin-top: 20px;
+    }
+    &-chitiet {
+        margin-top: 10px;
+
+        #detail {
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            outline: none;
+        }
+    }
+    &-columTilte {
+        margin-top: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: space-around;
+        .namecolum {
+            border: none;
+            font-size: 20px;
+            text-align: center;
+            background-color: rgb(223, 223, 223);
+            outline: none;
+            font-weight: bold;
+        }
+        i {
+            cursor: pointer;
+        }
+    }
+}
+.property-tag-item {
+    @include tag();
+}
+.Cardchat {
+    &__container {
+        padding: 5px;
+        margin-top: 10px;
+        background-color: #ffff;
+        height: 270px;
+        width: 100%;
+        border-radius: 5px;
+    }
+    &__input {
+        width: 90%;
+        height: 40px;
+        font-size: 20px;
+        padding-left: 10px;
+        display: inline-block;
+        margin-right: 10px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+    }
+    &__send {
+        font-size: 45px;
+        color: #6392cc;
+        cursor: pointer;
+        display: inline-block;
+    }
+}

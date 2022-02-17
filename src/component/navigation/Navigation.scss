@@ -1,9 +1,11 @@
 .nav {
     &__container {
         width: 300px;
-        height: 100vh;
+        height: calc(100vh - 72px);
         transition: all 0.4s linear;
         background-color: #e5e5e5;
+        position: absolute;
+        z-index: 100;
     }
     &__title {
         padding: 20px;
@@ -37,14 +39,11 @@
             padding-top: 3px;
             padding-left: 10px;
         }
+
         cursor: pointer;
         &:hover {
             border: 1px solid#6392cc;
             padding: 19px;
-        }
-        &.active {
-            background-color: #6392cc;
-            color: #fff;
         }
     }
     &__feature {
@@ -62,4 +61,14 @@
             }
         }
     }
+}
+.NavSub {
+    width: 300px;
+    transition: all 0.4s linear;
+}
+.active {
+    background-color: #6392cc;
+    z-index: 1000;
+    display: block;
+    color: #fff;
 }
