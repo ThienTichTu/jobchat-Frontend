@@ -1,7 +1,6 @@
 import './Colum.scss'
 import Card from '../Card/Card'
 export default function Colum({ card }) {
-    console.log(card);
     return (
 
         <>

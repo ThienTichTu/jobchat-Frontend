@@ -17,6 +17,7 @@ export default function Cardchat() {
                     <i className="fas fa-caret-square-right"></i>
                 </div>
             </div>
+
         </>
     )
 }

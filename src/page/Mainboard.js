@@ -9,7 +9,11 @@ import Header from '../component/header/Header'
 import Kanban from '../component/workspace/Kanban'
 import Myjob from '../component/workspace/Myjob'
 import Chat from '../component/workspace/Chat'
+import Profile from '../component/workspace/Profile'
+import Card_detail from '../component/Card/Card_detail'
+
 export default function Mainboard() {
+
 
     const [stay, setStay] = useState('Trang chủ');
 
@@ -49,12 +53,17 @@ export default function Mainboard() {
 
                     <div ref={barsub} className='barsub_ef'>
                         <Switch>
+                            <Route path="/" exact>
+                                <Kanban
+                                    boo={boo}
+                                />
+                            </Route>
                             <Route path="/kanban">
                                 <Kanban
                                     boo={boo}
                                 />
                             </Route>
-                            <Route path="/chat">
+                            <Route path="/chat" >
                                 <Chat
                                     boo={boo}
                                 />
@@ -64,9 +73,17 @@ export default function Mainboard() {
                                     boo={boo}
                                 />
                             </Route>
+                            <Route path="/canhan" >
+                                <Profile
+                                    boo={boo}
+                                />
+                            </Route>
                         </Switch>
                     </div>
+                    <Card_detail />
                 </div>
+
+
 
             </Router>
         </>

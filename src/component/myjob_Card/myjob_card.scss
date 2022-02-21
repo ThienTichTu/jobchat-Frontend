@@ -1,0 +1,19 @@
+.myjob {
+    &__card {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        background-color: #ffffff;
+        padding: 10px;
+        &:hover {
+            padding: 9px;
+            border: 1px solid #dbdbdb;
+        }
+        div {
+            padding-left: 10px;
+            span {
+                font-size: 18px;
+            }
+        }
+    }
+}

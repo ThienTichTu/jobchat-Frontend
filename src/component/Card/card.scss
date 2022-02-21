@@ -179,6 +179,7 @@
         height: 270px;
         width: 100%;
         border-radius: 5px;
+        display: inline-block;
     }
     &__input {
         width: 90%;
@@ -190,11 +191,13 @@
         border: none;
         outline: none;
         border-radius: 5px;
+        margin-top: 10px;
     }
     &__send {
         font-size: 45px;
-        color: #6392cc;
+        color: #4693f1;
         cursor: pointer;
         display: inline-block;
+        margin-top: 6px;
     }
 }

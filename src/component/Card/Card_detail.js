@@ -1,25 +1,38 @@
 import { useRef, useEffect } from "react"
 import Cardchat from './Cardchat'
-import './card.scss'
-export default function Card_detail({ boo, card, handleCard_detail }) {
-    const cardetail = useRef();
-    useEffect(() => {
-        if (boo) {
-            cardetail.current.style.transform = 'translateX(0px)';
-            cardetail.current.style.zIndex = '10000';
+import { useSelector, useDispatch } from 'react-redux';
+import { closeDetail } from '../../action/card_detail_action';
 
+import './card.scss'
+export default function Card_detail({ boo, card }) {
+    const cardetail = useRef();
+    const data = useSelector(state => state.Card);
+    const dispatch = useDispatch();
+
+    const handleCloseCard = () => {
+        const action = closeDetail(card);
+        dispatch(action);
+    }
+
+    useEffect(() => {
+        if (data.active) {
+            cardetail.current.style.marginRight = '500px';
+            cardetail.current.style.zIndex = '10000';
         } else {
-            cardetail.current.style.transform = 'translateX(500px)';
+            cardetail.current.style.marginRight = '0px';
+
         }
-    }, [boo])
+    }, [data.active])
+
+
     return (
 
         <div ref={cardetail} className="card__detail">
             <div className="card__detail-header">
-                <h2>{card.id}</h2>
-                <h2>{card.title}</h2>
+                <h2>{data.card.id}</h2>
+                <h2>{data.card.title}</h2>
                 <div
-                    onClick={handleCard_detail}
+                    onClick={handleCloseCard}
                     className="card__detail-close"
                 >
                     <i className="fa-solid fa-xmark"></i>
@@ -30,11 +43,13 @@ export default function Card_detail({ boo, card, handleCard_detail }) {
                     <span>Dự án: </span>
                     <span
                         className="project-name"
-                    >Free Land </span>
+                    >
+                        {data.card.project}
+                    </span>
                 </div>
                 <div className="card__detail-listuser">
                     <h4>Người thực hiện:</h4>
-                    {card.users.map((user, index) =>
+                    {data.card.users.map((user, index) =>
                         <div key={index} className='card__detail-listuser-item'>
                             <i className="fa-solid fa-user"></i>
                             <span>{user.name}</span>
@@ -44,7 +59,7 @@ export default function Card_detail({ boo, card, handleCard_detail }) {
                 </div>
                 <div className="card__detail-property">
                     {
-                        card.property.map((element, index) => (
+                        data.card.property.map((element, index) => (
                             <div key={index} className="property-tag-item">
                                 <span>{element}</span>
                             </div>

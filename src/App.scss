@@ -6,6 +6,12 @@
 body {
     font-family: 'Helvetica Neue', Helvetica;
 }
+.App {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
 .mainboard__container {
 }
 a {
@@ -22,4 +28,6 @@ a {
 }
 .barsub_ef {
     transition: all 0.4s linear;
+    overflow-x: hidden;
+    position: relative;
 }

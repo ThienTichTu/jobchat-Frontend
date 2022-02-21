@@ -44,14 +44,24 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
 
                 </div>
                 <div>
-                    <NavLink to="/kanban">
+                    <NavLink to="/canhan">
                         <div
                             className="nav__element"
-                            onClick={() => handleStay("Trang chủ")}
+                            onClick={() => handleStay("Cá nhân")}
 
                         >
                             <i className="fa-solid fa-house"></i>
-                            <span>    Trang Chủ</span>
+                            <span>    Cá nhân</span>
+                        </div>
+                    </NavLink>
+                    <NavLink to="/kanban">
+                        <div
+                            className="nav__element"
+                            onClick={() => handleStay("Tiến Trình")}
+
+                        >
+                            <i className="fa-solid fa-house"></i>
+                            <span>    Tiến Trình</span>
                         </div>
                     </NavLink>
 

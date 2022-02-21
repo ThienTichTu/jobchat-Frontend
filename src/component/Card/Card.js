@@ -1,11 +1,18 @@
 import { useRef, useState } from 'react';
 import './card.scss'
 import Card_detail from './Card_detail';
+import { useDispatch } from 'react-redux';
+import { showDetail } from '../../action/card_detail_action';
 export default function Card({ card }) {
-    const [cardTogle, setCardTogle] = useState(false)
-    function handleCard_detail() {
-        setCardTogle(!cardTogle)
+    const dispatch = useDispatch();
+
+    const handleActiveCard = () => {
+        const action = showDetail(card);
+        dispatch(action);
     }
+
+
+
     return (
 
         <>
@@ -18,9 +25,10 @@ export default function Card({ card }) {
                 </div>
                 <div className="card-title">
                     <span
-                        onClick={handleCard_detail}
+                        onClick={handleActiveCard}
                     >
                         {card.title}
+
                     </span>
                 </div>
                 <div className="card-tag">
@@ -50,13 +58,6 @@ export default function Card({ card }) {
                     <span>Thứ 2 14/2</span>
                 </div>
             </div>
-            {
-                cardTogle && <Card_detail
-                    card={card}
-                    boo={cardTogle}
-                    handleCard_detail={handleCard_detail}
-                />
-            }
         </>
     )
 }

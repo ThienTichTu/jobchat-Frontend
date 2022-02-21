@@ -1,6 +1,7 @@
 import './kanban.scss'
 import Colum from '../Colum/Colum';
 import { useRef, useEffect } from 'react'
+
 export default function Kanban({ boo }) {
 
     const colums = [
@@ -72,6 +73,7 @@ export default function Kanban({ boo }) {
                         </span>
                     </div>
                 </div>
+
             </div>
         </>
     )
