@@ -1,0 +1,74 @@
+.nav {
+    &__container {
+        width: 300px;
+        height: calc(100vh - 72px);
+        transition: all 0.4s linear;
+        background-color: #e5e5e5;
+        position: absolute;
+        z-index: 100;
+    }
+    &__title {
+        padding: 20px;
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-logo {
+            img {
+                width: 150px;
+            }
+        }
+        &-icon {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 30px;
+            padding-left: 10px;
+        }
+    }
+    &__element {
+        height: 36px;
+        width: 100%;
+        padding: 20px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+
+        span {
+            font-weight: bold;
+            padding-top: 3px;
+            padding-left: 10px;
+        }
+
+        cursor: pointer;
+        &:hover {
+            border: 1px solid#6392cc;
+            padding: 19px;
+        }
+    }
+    &__feature {
+        padding: 20px;
+        &-element {
+            display: flex;
+            height: 36px;
+            border: 1px dashed rgb(153, 150, 150);
+            align-items: center;
+            padding-left: 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            span {
+                padding-left: 10px;
+            }
+        }
+    }
+}
+.NavSub {
+    width: 300px;
+    transition: all 0.4s linear;
+}
+.active {
+    background-color: #6392cc;
+    z-index: 1000;
+    display: block;
+    color: #fff;
+}
