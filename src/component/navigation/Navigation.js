@@ -1,30 +1,32 @@
 import './Navigation.scss'
-import Header from '../header/Header.js'
+import { ChangeBbtn, ChangePageName } from "../../redux/action/globalState"
 import { useState, useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 export default function Navigation({ handleStay, handleBoo, boo }) {
     const barDom = useRef();
-    const barsub = useRef();
-    const [bar, setBar] = useState(false);
-    const [stay, setStay] = useState('Trang chủ');
 
+    const activeBtn = useSelector(state => state.Effect.btn_ActiveNav);
+
+    const dispatch = useDispatch();
     function handleBar() {
-        setBar(!bar);
-        handleBoo(bar)
+        dispatch(ChangeBbtn(true));
     }
-    if (boo !== bar) {
-        setBar(boo);
+
+    function handlePageName(name) {
+        dispatch(ChangePageName(name));
     }
 
     useEffect(() => {
-        if (bar) {
+
+        if (activeBtn) {
             barDom.current.style.marginLeft = '-300px';
 
         } else {
             barDom.current.style.marginLeft = '0';
 
         }
-    }, [bar])
+    }, [activeBtn])
 
     return (
         <>
@@ -47,7 +49,7 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                     <NavLink to="/canhan">
                         <div
                             className="nav__element"
-                            onClick={() => handleStay("Cá nhân")}
+                            onClick={() => handlePageName("Cá Nhân")}
 
                         >
                             <i className="fa-solid fa-house"></i>
@@ -57,7 +59,8 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                     <NavLink to="/kanban">
                         <div
                             className="nav__element"
-                            onClick={() => handleStay("Tiến Trình")}
+                            onClick={() => handlePageName("Tiến Trình")}
+
 
                         >
                             <i className="fa-solid fa-house"></i>
@@ -68,7 +71,8 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                     <NavLink to="/myjob" >
                         <div
                             className="nav__element"
-                            onClick={() => handleStay("Công việc của tôi")}
+                            onClick={() => handlePageName("Công Việc Của Tôi")}
+
                         >
                             <i className="fa-solid fa-circle-check"></i>
                             <span>    Công việc của tôi</span>
@@ -77,7 +81,8 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                     <NavLink to='/chat'>
                         <div
                             className="nav__element"
-                            onClick={() => handleStay(" Tin nhắn")}
+                            onClick={() => handlePageName("Tin Nhắn")}
+
                         >
                             <i className="fa-solid fa-message"></i>
                             <span>    Tin nhắn</span>

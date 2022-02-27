@@ -1,0 +1,39 @@
+.toastMessage {
+    width: 300px;
+    position: absolute;
+    right: 10px;
+    top: -100px;
+    z-index: 1000;
+    background-color: #fff;
+    &_item {
+        width: 100%;
+        height: 50px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        transform: translateX(360px);
+        transition: all 0.4s linear;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative;
+        top: 100px;
+        &-warning {
+            border-top: 3px solid #000;
+            background-color: rgb(251, 247, 0);
+            i {
+                display: block;
+                margin-right: 10px;
+            }
+        }
+        &-success {
+            color: #fff;
+            border-top: 3px solid rgba(2, 1, 0, 0.561);
+            background-color: rgb(78, 215, 78);
+            i {
+                display: block;
+                margin-right: 10px;
+            }
+        }
+    }
+}

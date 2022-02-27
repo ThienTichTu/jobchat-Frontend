@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import './card.scss'
 import Card_detail from './Card_detail';
 import { useDispatch } from 'react-redux';
-import { showDetail } from '../../action/card_detail_action';
+import { showDetail } from '../../redux/action/card_detail_action';
 export default function Card({ card }) {
     const dispatch = useDispatch();
 

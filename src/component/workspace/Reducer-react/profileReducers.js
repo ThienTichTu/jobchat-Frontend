@@ -5,7 +5,7 @@ const profilePreducers = (state, action) => {
         case "NAME": {
             return {
                 ...state,
-                name: action.payload
+                displayName: action.payload
             }
         }
         case "PHONE": {
@@ -23,7 +23,7 @@ const profilePreducers = (state, action) => {
         case "DES": {
             return {
                 ...state,
-                des: action.payload
+                decriptions: action.payload
             }
         }
         case "ADDRESS": {
@@ -32,16 +32,11 @@ const profilePreducers = (state, action) => {
                 address: action.payload
             }
         }
-        case "BIRTH": {
-            return {
-                ...state,
-                birth: action.payload
-            }
-        }
+
         case "TELE": {
             return {
                 ...state,
-                tele: action.payload
+                telegram: action.payload
             }
         }
         case "FACE": {

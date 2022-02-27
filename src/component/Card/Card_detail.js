@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react"
 import Cardchat from './Cardchat'
 import { useSelector, useDispatch } from 'react-redux';
-import { closeDetail } from '../../action/card_detail_action';
+import { closeDetail } from '../../redux/action/card_detail_action';
 
 import './card.scss'
 export default function Card_detail({ boo, card }) {
