@@ -1,11 +1,18 @@
 import "./profile.scss"
 import { useReducer } from "react"
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from "axios"
+import { API_UPDATE_USER } from '../../config/API'
+import { ToastAcction } from "../../redux/action/toast"
+import { LoginAction } from "../../redux/action/auth"
 
-import profilePreducers, { initState } from "./Reducer-react/profileReducers"
+import profilePreducers from "./Reducer-react/profileReducers"
 
 export default function Profile() {
-    const initState = useSelector(state => state.User);
+
+    const userInfor = useSelector(state => state.auth.user);
+
+    const dispatch = useDispatch();
 
     const setProfile = (type, payload) => {
         return {
@@ -15,18 +22,35 @@ export default function Profile() {
     }
 
 
-    const [state, dipatch] = useReducer(profilePreducers, initState);
+    const [state, dipatch] = useReducer(profilePreducers, userInfor);
+    const handleUpdate = () => {
+        console.log(userInfor)
+        axios({
+            method: 'post',
+            url: API_UPDATE_USER,
+            data: state,
+            withCredentials: true,
+        })
+            .then(rs => {
+                if (rs.data === "update succesfuly") {
+                    console.log("Cập nhật thành công")
+                    dispatch(LoginAction(state))
+                    dispatch(ToastAcction({ type: "success", mess: "Cập nhật thành Công" }))
+                }
+            })
+            .catch(err => console.error(err))
+    }
 
 
     return (
         <div className="profile">
             <div className="profile__left">
                 <div className="profile-avatar">
-                    <img src="../../../../../../avatar.jpg" alt="" />
+                    <img src={userInfor.avatar} alt="" />
                 </div>
                 <div className="profile-infor">
                     <div className="profile__infor-name">
-                        <span>{state.name}</span>
+                        <span>{state.displayName}</span>
                     </div>
                     <div className="profile__infor-phone">
                         <span>{state.phone}</span>
@@ -74,7 +98,7 @@ export default function Profile() {
                         </span>
                         <input type="text"
                             className="input_name"
-                            value={state.name}
+                            value={state.displayName}
                             onChange={(e) => dipatch(setProfile("NAME", e.target.value))}
                         />
                     </div>
@@ -94,7 +118,7 @@ export default function Profile() {
                         </span>
                         <textarea type="text"
                             className="input_name"
-                            value={state.des}
+                            value={state.decriptions}
                             onChange={(e) => dipatch(setProfile("DES", e.target.value))}
 
                         >
@@ -121,23 +145,14 @@ export default function Profile() {
 
                         />
                     </div>
-                    <div className="body_item">
-                        <span>
-                            Sinh nhật:
-                        </span>
-                        <input type="text"
-                            className="input_name"
-                            value={state.birth}
-                            onChange={(e) => dipatch(setProfile("BIRTH", e.target.value))}
-                        />
-                    </div>
+
                     <div className="body_item">
                         <span>
                             Tele:
                         </span>
                         <input type="text"
                             className="input_name"
-                            value={state.tele}
+                            value={state.telegram}
                             onChange={(e) => dipatch(setProfile("TELE", e.target.value))}
                         />
                     </div>
@@ -164,6 +179,13 @@ export default function Profile() {
                             onChange={(e) => dipatch(setProfile("TWITTER", e.target.value))}
                         />
                     </div>
+                </div>
+
+                <div className="update_profile">
+                    <span
+                        onClick={handleUpdate}
+                    >
+                        Cập nhật</span>
                 </div>
 
             </div>

@@ -7,14 +7,13 @@ export const initState = {
     birth: "09/08/2000",
     tele: "",
     face: "",
-    twitter: ""
+    twitter: "",
 }
 
 const UserReducers = (state = initState, action) => {
     switch (action.type) {
         case "CHANGE_DETAIL": {
             const newUser = action.payload;
-            console.log(newUser);
             return state;
         }
 

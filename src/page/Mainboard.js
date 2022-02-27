@@ -11,79 +11,61 @@ import Myjob from '../component/workspace/Myjob'
 import Chat from '../component/workspace/Chat'
 import Profile from '../component/workspace/Profile'
 import Card_detail from '../component/Card/Card_detail'
+import { useSelector } from 'react-redux';
 
 export default function Mainboard() {
 
-
-    const [stay, setStay] = useState('Trang chủ');
-
-    const [boo, setBoo] = useState(false);
+    const activeBtn = useSelector(state => state.Effect.btn_ActiveNav);
     const barsub = useRef();
-    function handleStay(char) {
-        setStay(char)
-    }
 
-    function handleBoo(char) {
-        setBoo(!char);
-    }
+
 
 
     useEffect(() => {
-        if (boo) {
+        if (activeBtn) {
             barsub.current.style.marginLeft = '0';
 
         } else {
             barsub.current.style.marginLeft = '300px';
         }
-    }, [boo])
+    }, [activeBtn])
     return (
         <>
             <Router >
                 <div>
-                    <Header
-                        stay={stay}
-                        bar={boo}
-                        handleBar={handleBoo}
-                    />
-                    <Navigation
-                        handleStay={handleStay}
-                        handleBoo={handleBoo}
-                        boo={boo}
-                    />
+                    <Header />
+                    <Navigation />
 
                     <div ref={barsub} className='barsub_ef'>
                         <Switch>
                             <Route path="/" exact>
                                 <Kanban
-                                    boo={boo}
+
                                 />
                             </Route>
                             <Route path="/kanban">
                                 <Kanban
-                                    boo={boo}
+
                                 />
                             </Route>
                             <Route path="/chat" >
                                 <Chat
-                                    boo={boo}
+
                                 />
                             </Route>
                             <Route path="/myjob">
                                 <Myjob
-                                    boo={boo}
+
                                 />
                             </Route>
                             <Route path="/canhan" >
                                 <Profile
-                                    boo={boo}
                                 />
                             </Route>
                         </Switch>
                     </div>
                     <Card_detail />
                 </div>
-
-
 
             </Router>
         </>
