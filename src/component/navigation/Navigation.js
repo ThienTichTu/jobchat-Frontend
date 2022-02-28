@@ -1,4 +1,5 @@
 import './Navigation.scss'
+import { addFriend_Active } from "../../redux/action/togle"
 import { ChangeBbtn, ChangePageName } from "../../redux/action/globalState"
 import { useState, useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
@@ -7,6 +8,7 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
     const barDom = useRef();
 
     const activeBtn = useSelector(state => state.Effect.btn_ActiveNav);
+
 
     const dispatch = useDispatch();
     function handleBar() {
@@ -99,7 +101,11 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                         <i className="fa-solid fa-plus"></i>
                         <span>    Tạo nhóm chat</span>
                     </div>
-                    <div className="nav__feature-element">
+                    <div
+                        className="nav__feature-element"
+                        onClick={() => dispatch(addFriend_Active(true))}
+
+                    >
                         <i className="fa-solid fa-plus"></i>
                         <span>    Thêm bạn bè</span>
                     </div>

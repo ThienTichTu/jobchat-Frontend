@@ -4,20 +4,31 @@ import { ChangeBbtn } from "../../redux/action/globalState"
 import { LogoutAction } from "../../redux/action/auth"
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Mess_Active } from "../../redux/action/togle"
+
 import axios from "axios"
+import { socket } from "../../config/Socketio"
 export default function Header() {
 
     const activeBtn = useSelector(state => state.Effect.btn_ActiveNav);
+
     const pageName = useSelector(state => state.Effect.pageName);
+
+    const messCout = useSelector(state => state.Effect.messCout);
+
     const img = useSelector(state => state.auth.user.avatar);
+    const idUser = useSelector(state => state.auth.user.id);
+
     const [logoutActive, setLogoutActive] = useState(true)
     const dispatch = useDispatch();
-    console.log(img)
+
     function handleBar() {
         dispatch(ChangeBbtn(false));
     }
 
     function logOut() {
+
+
         axios({
             method: 'get',
             url: API_LOGOUT,
@@ -25,7 +36,7 @@ export default function Header() {
         })
             .then(rs => {
                 if (rs.data === "logout ok") {
-                    localStorage.removeItem('iduser');
+                    socket.emit("idClient_disconnet", idUser)
                     dispatch(LogoutAction(false));
                 }
 
@@ -70,8 +81,20 @@ export default function Header() {
                         />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <div className="header__option-mess">
+                    <div
+                        className="header__option-mess"
+                        onClick={() => dispatch(Mess_Active(true))}
+                    >
                         <i className="fa-solid fa-bell"></i>
+
+                        {
+                            messCout !== 0 && <>
+                                <span>
+                                    {messCout}
+                                </span>
+                            </>
+                        }
+
                     </div>
                     <div
                         className="header__option-avatar"

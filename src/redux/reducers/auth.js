@@ -12,7 +12,7 @@ const auth = (state = initState, action) => {
             return { ...state, login: action.payload, user: {} };
         }
         case "LOG_IN": {
-            console.log(action.payload)
+
             return { ...state, login: true, user: action.payload };
         }
 

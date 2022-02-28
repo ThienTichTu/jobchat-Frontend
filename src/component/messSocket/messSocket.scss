@@ -1,0 +1,109 @@
+.messsocket {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(241, 241, 241, 0.418);
+    z-index: 1000;
+    &-container {
+        width: 600px;
+        height: 700px;
+        margin: 100px auto;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    &-header {
+        display: flex;
+        height: 40px;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #dbdbdb;
+        i {
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+    &-body {
+        height: calc(100% - 40px);
+        width: 100%;
+        overflow-y: auto;
+        margin-top: 5px;
+    }
+    &-item {
+        height: 100px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #dbdbdb;
+        padding: 5px;
+
+        &-addfriend {
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+        &-avatar {
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+        &-name {
+            display: block;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+        &-ido {
+            padding: 10px 15px;
+            margin-left: auto;
+            margin-right: 10px;
+            background-color: rgb(128, 240, 0);
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(136, 246, 10);
+                color: #fff;
+            }
+        }
+        &-seen {
+            padding: 10px 15px;
+            margin-left: auto;
+            margin-right: 10px;
+            background-color: rgb(128, 240, 0);
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            flex: 1;
+            &:hover {
+                background-color: rgb(136, 246, 10);
+                color: #fff;
+            }
+        }
+        &-mess {
+            display: flex;
+            justify-content: space-between;
+            overflow-y: auto;
+            align-items: center;
+            height: 100%;
+            span {
+                display: block;
+                flex: 8;
+            }
+        }
+    }
+}
+.messsocket-item + .messsocket-item {
+    margin-top: 10px;
+}

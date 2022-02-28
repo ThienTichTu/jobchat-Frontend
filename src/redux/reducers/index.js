@@ -3,6 +3,7 @@ import UserReducers from './user';
 import globalState from './globalState';
 import auth from './auth';
 import toastMessage from './toastmessage';
+import Togle from './togle';
 import { combineReducers } from "redux";
 
 const rootReducers = combineReducers({
@@ -10,6 +11,7 @@ const rootReducers = combineReducers({
     User: UserReducers,
     Effect: globalState,
     auth: auth,
-    toast: toastMessage
+    toast: toastMessage,
+    togle: Togle
 });
 export default rootReducers;

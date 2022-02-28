@@ -106,8 +106,6 @@ export default function Login() {
     return (
         <div className="login_containner">
             <div ref={loginref} className="login__form">
-                <h1>Đăng nhập</h1>
-
                 <div className="login__form-input">
                     <input type="text"
                         value={username}
