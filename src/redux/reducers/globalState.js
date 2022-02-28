@@ -1,6 +1,7 @@
 export const initState = {
     pageName: "Trang chủ",
-    btn_ActiveNav: false
+    btn_ActiveNav: false,
+    messCout: 0
 }
 
 const globalState = (state = initState, action) => {
@@ -13,6 +14,10 @@ const globalState = (state = initState, action) => {
         case "BTN_ACTIVE": {
 
             return { ...state, btn_ActiveNav: action.payload };
+        }
+        case "MESS_COUT": {
+
+            return { ...state, messCout: action.payload };
         }
         default: {
             return state;

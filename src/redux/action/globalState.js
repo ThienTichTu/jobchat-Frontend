@@ -11,3 +11,10 @@ export const ChangePageName = (detail) => {
         payload: detail
     }
 }
+
+export const increaseMess = (detail) => {
+    return {
+        type: "MESS_COUT",
+        payload: detail
+    }
+}

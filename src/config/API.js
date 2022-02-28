@@ -9,3 +9,9 @@ export const API_LOGOUT = `${host}/auth/logout`
 export const API_AUTH = `${host}/auth`
 
 export const API_UPDATE_USER = `${host}/user/updateUser`
+
+export const API_FIND_USER = `${host}/user/findUser`
+
+export const API_ADD_USER = `${host}/user/addFriend`
+
+export const API_GET_MESS = `${host}/user/getMessage`
