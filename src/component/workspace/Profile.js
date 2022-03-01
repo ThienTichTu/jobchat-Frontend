@@ -1,8 +1,9 @@
 import "./profile.scss"
-import { useReducer } from "react"
+import { useReducer, useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios"
-import { API_UPDATE_USER } from '../../config/API'
+import { socket } from '../../config/Socketio'
+import { API_UPDATE_USER, API_UPLOAD_AVATAR } from '../../config/API'
 import { ToastAcction } from "../../redux/action/toast"
 import { LoginAction } from "../../redux/action/auth"
 
@@ -11,6 +12,9 @@ import profilePreducers from "./Reducer-react/profileReducers"
 export default function Profile() {
 
     const userInfor = useSelector(state => state.auth.user);
+
+    const [avatarPreview, setAvatarPreview] = useState();
+    const [avatar, setAvatar] = useState();
 
     const dispatch = useDispatch();
 
@@ -23,8 +27,14 @@ export default function Profile() {
 
 
     const [state, dipatch] = useReducer(profilePreducers, userInfor);
+
+    useEffect(() => {
+        return () => {
+            avatarPreview && URL.revokeObjectURL(avatarPreview)
+        }
+    }, [avatarPreview])
+
     const handleUpdate = () => {
-        console.log(userInfor)
         axios({
             method: 'post',
             url: API_UPDATE_USER,
@@ -41,13 +51,70 @@ export default function Profile() {
             .catch(err => console.error(err))
     }
 
+    const handleChangeAvatar = (e) => {
 
+        setAvatarPreview(URL.createObjectURL(e.target.files[0]))
+        setAvatar(e.target.files[0])
+    }
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+        formData.append("avatar_update", avatar);
+        try {
+            const response = await axios({
+                method: "post",
+                url: API_UPLOAD_AVATAR,
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            socket.emit("Client_updateAvatar", {
+                url: response.data,
+                id: userInfor.id
+            })
+            socket.on("Server_updateAvatar", (data) => {
+                dispatch(ToastAcction({ type: "success", mess: "Cập nhật thành Công" }))
+                dipatch(setProfile("AVATAR", data))
+                setAvatarPreview(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className="profile">
             <div className="profile__left">
                 <div className="profile-avatar">
-                    <img src={userInfor.avatar} alt="" />
+                    <img src={avatarPreview || state.avatar} alt="" />
                 </div>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="profile-avatar-updateImg"
+                >
+                    <div>
+                        <input
+
+                            type="file"
+                            id="file_update-avatar"
+                            onChange={(e) => handleChangeAvatar(e)}
+
+                        />
+                        <label className="label-avatar" htmlFor="file_update-avatar">
+                            Cập nhật avatar
+
+                        </label>
+                    </div>
+                    {
+                        avatarPreview &&
+                        <button
+                            className="label-avatar-accept"
+                            type="submit"
+                        >
+                            Lưu
+                        </button>
+                    }
+
+                </form>
                 <div className="profile-infor">
                     <div className="profile__infor-name">
                         <span>{state.displayName}</span>

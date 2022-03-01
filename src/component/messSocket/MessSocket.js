@@ -76,12 +76,10 @@ export default function MessSocket() {
                                 key={index}
                                 type={message.type}
                                 data={message.data}
-
+                                state={message.state}
                             />
                         ))
                     }
-
-
 
 
                 </div>

@@ -51,6 +51,12 @@ const profilePreducers = (state, action) => {
                 twitter: action.payload
             }
         }
+        case "AVATAR": {
+            return {
+                ...state,
+                avatar: action.payload
+            }
+        }
         default: {
             return state
         }

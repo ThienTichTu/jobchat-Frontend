@@ -75,27 +75,18 @@
             }
         }
         &-seen {
-            padding: 10px 15px;
-            margin-left: auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgb(195, 195, 194);
             margin-right: 10px;
-            background-color: rgb(128, 240, 0);
-            border: none;
-            outline: none;
-            border-radius: 5px;
-            font-weight: bold;
+            align-self: center;
             cursor: pointer;
-            margin-left: 10px;
-            flex: 1;
-            &:hover {
-                background-color: rgb(136, 246, 10);
-                color: #fff;
-            }
         }
         &-mess {
             display: flex;
             justify-content: space-between;
             overflow-y: auto;
-            align-items: center;
             height: 100%;
             span {
                 display: block;
