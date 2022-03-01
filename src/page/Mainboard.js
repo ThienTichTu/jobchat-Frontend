@@ -45,27 +45,27 @@ export default function Mainboard() {
 
                     <div ref={barsub} className='barsub_ef'>
                         <Switch>
-                            <Route path="/" exact>
+                            {/* <Route path="/" exact>
+                                <Kanban
+
+                                />
+                            </Route> */}
+                            <Route path="/kanban" exact>
                                 <Kanban
 
                                 />
                             </Route>
-                            <Route path="/kanban">
-                                <Kanban
-
-                                />
-                            </Route>
-                            <Route path="/chat" >
+                            <Route path="/chat" exact >
                                 <Chat
 
                                 />
                             </Route>
-                            <Route path="/myjob">
+                            <Route path="/myjob" exact>
                                 <Myjob
 
                                 />
                             </Route>
-                            <Route path="/canhan" >
+                            <Route path="/canhan" exact>
                                 <Profile
                                 />
                             </Route>

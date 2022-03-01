@@ -15,6 +15,10 @@ const auth = (state = initState, action) => {
 
             return { ...state, login: true, user: action.payload };
         }
+        // case "SET_AVATAR": {
+
+        //     return { ...state, login: true, user };
+        // }
 
         default: {
             return state;

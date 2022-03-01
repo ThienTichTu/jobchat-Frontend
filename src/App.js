@@ -44,11 +44,12 @@ function App() {
 							return init
 						}
 					}, 0)
+					console.log("auth set cout mess ", messcout)
 					dispatch(increaseMess(messcout))
 				}
 			})
 			.catch(err => console.log(err))
-	}, [])
+	}, [islogin])
 
 	return (
 		<div className="App">

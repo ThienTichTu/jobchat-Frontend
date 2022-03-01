@@ -15,3 +15,5 @@ export const API_FIND_USER = `${host}/user/findUser`
 export const API_ADD_USER = `${host}/user/addFriend`
 
 export const API_GET_MESS = `${host}/user/getMessage`
+
+export const API_UPLOAD_AVATAR = `${host}/user/uploadAvatar`
