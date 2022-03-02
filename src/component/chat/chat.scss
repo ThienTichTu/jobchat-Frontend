@@ -108,11 +108,9 @@
         display: inline-block;
         margin-right: 10px;
     }
-    &-stateOn {
-        color: rgb(58, 179, 2);
-    }
-    &-stateOff {
-        opacity: 0.5;
+    &-state {
+        margin-left: auto;
+        margin-right: 10px;
     }
 }
 .nav_friend-item + .nav_friend-item {
