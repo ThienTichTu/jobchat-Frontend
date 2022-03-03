@@ -16,4 +16,8 @@ export const API_ADD_USER = `${host}/user/addFriend`
 
 export const API_GET_MESS = `${host}/user/getMessage`
 
+export const API_GET_CHATROOM = `${host}/user/getdataChatRoom`
+
 export const API_UPLOAD_AVATAR = `${host}/user/uploadAvatar`
+
+export const API_GET_FRIEND = `${host}/user/getFriend`

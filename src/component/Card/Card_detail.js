@@ -69,7 +69,7 @@ export default function Card_detail({ boo, card }) {
                 <div className="card__detail-columTilte">
                     <i className="fas fa-angle-double-left"></i>
                     <input className="namecolum" type="text"
-                        value='Công việc 1'
+                        placeholder="Công việc 1"
                     />
                     <i className="fas fa-angle-double-right"></i>
 
