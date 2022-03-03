@@ -1,15 +1,17 @@
 import { API_GET_FRIEND } from "../../config/API"
 import axios from "axios"
-import { useSelector, dispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { socket } from "../../config/Socketio"
-export default function Nav_friend() {
+import { setRoom } from "../../redux/action/ChatRooms"
+export default function Nav_friend({ handleGetChatRoms }) {
 
     const [listFriend, setListFriend] = useState([]);
     const [listFriendOnline, setListFriendOnline] = useState([]);
 
-    const messCout = useSelector(state => state.Effect.messCout)
+    const dispatch = useDispatch()
 
+    const messCout = useSelector(state => state.Effect.messCout)
     useEffect(() => {
         axios
             .get(API_GET_FRIEND, { withCredentials: true })
@@ -41,13 +43,17 @@ export default function Nav_friend() {
     socket.on("Server_Mess_Useronline", data => {
         setListFriendOnline([...listFriendOnline, data])
     })
+
     return (
         <div className="nav_friend">
             {
 
                 listFriend.map((user, index) =>
 
-                    <div key={index} className="nav_friend-item">
+                    <div
+                        key={index} className="nav_friend-item"
+                        onClick={() => dispatch(setRoom(user))}
+                    >
                         <div className="nav_friend-avatar">
                             <img src={user.avatar} alt="" />
                         </div>

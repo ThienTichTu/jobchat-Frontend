@@ -26,23 +26,30 @@ export default function MessSocket() {
 
         }
 
+
+
     }, [MessActive])
 
     useEffect(() => {
-        axios({
-            method: 'get',
-            url: API_GET_MESS,
-            withCredentials: true,
-        })
-            .then(rs => {
-                console.log(rs.data)
-                setMessArray([...rs.data])
+        if (MessActive) {
+            axios({
+                method: 'get',
+                url: API_GET_MESS,
+                withCredentials: true,
             })
-            .catch(err => console.log(err))
+                .then(rs => {
+                    console.log(rs.data)
+                    setMessArray([...rs.data])
+                })
+                .catch(err => console.log(err))
+        }
+
+        return () => {
+            setMessArray([])
+        }
     }, [MessActive, messCout])
 
     socket.on("Server-send-Rendermess", (data) => {
-        console.log(data)
         setMessArray([...data])
         const messcout = data.reduce((init, curentValue) => {
             if (curentValue.state === "chua xem") {

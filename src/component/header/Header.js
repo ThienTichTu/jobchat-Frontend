@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Mess_Active } from "../../redux/action/togle"
 
+
 import axios from "axios"
 import { socket } from "../../config/Socketio"
 export default function Header() {
@@ -38,6 +39,7 @@ export default function Header() {
                 if (rs.data === "logout ok") {
                     socket.emit("idClient_disconnet", idUser)
                     dispatch(LogoutAction(false));
+
                 }
 
             })

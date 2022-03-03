@@ -18,3 +18,10 @@ export const increaseMess = (detail) => {
         payload: detail
     }
 }
+
+export const ChatRender = (detail) => {
+    return {
+        type: "CHAT_RENDER",
+        payload: detail
+    }
+}
