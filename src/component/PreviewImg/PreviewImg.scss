@@ -1,0 +1,29 @@
+.Preview {
+    &__container {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        z-index: 1000;
+        background-color: rgba(2, 2, 2, 0.164);
+        i {
+            font-size: 25px;
+            color: #fff;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+    }
+    &__wapper {
+        width: 800px;
+        overflow: hidden;
+        border-radius: 5px;
+        margin: 10px auto;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+    }
+}

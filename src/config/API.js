@@ -21,3 +21,5 @@ export const API_GET_CHATROOM = `${host}/user/getdataChatRoom`
 export const API_UPLOAD_AVATAR = `${host}/user/uploadAvatar`
 
 export const API_GET_FRIEND = `${host}/user/getFriend`
+
+export const API_UPLOAD_IMGCHAT = `${host}/chat/uploadImgChat`

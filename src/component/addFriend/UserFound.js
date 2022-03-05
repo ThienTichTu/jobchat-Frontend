@@ -1,22 +1,9 @@
-import { API_ADD_USER } from "../../config/API"
-import axios from "axios"
+
 import { socket } from '../../config/Socketio'
 import { useSelector } from 'react-redux'
-export default function UserFound({ idFind, displayName, avatar }) {
+export default function UserFound({ idFind, displayName, avatar, state }) {
     const dataUser = useSelector(state => state.auth.user)
     function handleAdd() {
-        // axios({
-        //     method: 'post',
-        //     url: API_ADD_USER,
-        //     data: {
-        //         idUser: id
-        //     },
-        //     withCredentials: true,
-        // })
-        //     .then(rs => {
-        //         console.log(rs.data)
-        //     })
-        //     .catch(err => console.log(err))
 
         const { id, displayName, avatar } = dataUser
         socket.emit("add_friend", {
@@ -37,11 +24,20 @@ export default function UserFound({ idFind, displayName, avatar }) {
                 </span>
             </div>
             <div className="user__found-add">
-                <span
-                    onClick={handleAdd}
-                >
-                    Thêm bạn bè
-                </span>
+                {
+                    state === "not-friend"
+                        ? <span
+                            onClick={handleAdd}
+                        >
+                            Thêm bạn bè
+                        </span>
+                        :
+                        <span
+                            style={{ "backgroundColor": "#686868" }}
+                        >
+                            Bạn bè
+                        </span>
+                }
             </div>
         </div>
     )

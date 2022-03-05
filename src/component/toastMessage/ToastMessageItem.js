@@ -11,8 +11,9 @@ export default function ToastMessageItem(prop) {
     const timeout1 = useRef()
     const timeout2 = useRef()
     useEffect(() => {
+
         if (toast.type === "success" && toast.active) {
-            console.log(toast.type, toast.active)
+
             MessRef.current.classList.add("toastMessage_item-success")
             MessRef.current.style.transform = "translateX(0px)"
             timeout1.current = setTimeout(() => {
@@ -23,8 +24,8 @@ export default function ToastMessageItem(prop) {
             }, 2000)
         }
         if (toast.type === "warning" && toast.active) {
-            console.log(toast.type, toast.active)
-            timeout1.current = MessRef.current.classList.add("toastMessage_item-warning")
+
+            MessRef.current.classList.add("toastMessage_item-warning")
             MessRef.current.style.transform = "translateX(0px)"
             timeout1.current = setTimeout(() => {
                 MessRef.current.style.transform = "translateX(360px)"

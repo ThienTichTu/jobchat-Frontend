@@ -5,6 +5,8 @@ import axios from "axios"
 import UserFound from "./UserFound"
 import { addFriend_Active } from "../../redux/action/togle"
 import { API_FIND_USER } from "../../config/API"
+import { ToastAcction } from "../../redux/action/toast"
+
 export default function AddFriend() {
 
     const [search, setSearch] = useState("")
@@ -17,26 +19,35 @@ export default function AddFriend() {
             addFriendRef.current.style.display = "block"
         } else {
             addFriendRef.current.style.display = "none"
-
         }
-
+        return () => {
+            setUserFounded([])
+            setSearch("")
+        }
     }, [active])
 
     function handleFind() {
-        let data = "s"
-        if (search !== "") {
-            data = search
-        }
-        axios({
-            method: 'get',
-            url: `${API_FIND_USER}/${data}`,
-            withCredentials: true,
-        })
-            .then(rs => {
 
-                setUserFounded([...rs.data]);
+        if (search.length !== 0) {
+            axios({
+                method: 'get',
+                url: `${API_FIND_USER}/${search}`,
+                withCredentials: true,
             })
-            .catch(err => console.log(err))
+                .then(rs => {
+                    if (rs.data.length === 0)
+                        setUserFounded(["notfound"]);
+                    else
+                        setUserFounded([...rs.data]);
+
+                    console.log(rs.data)
+                })
+                .catch(err => console.log(err))
+
+        } else {
+            dispatch(ToastAcction({ type: "warning", mess: "Bạn chưa nhập từ khóa tìm kiếm !!" }))
+        }
+        setSearch("")
     }
 
     return (
@@ -56,7 +67,7 @@ export default function AddFriend() {
                         <input
                             type="text"
                             placeholder="Tìm kiếm..."
-                            defaultValue={search}
+                            value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         <i
@@ -68,28 +79,26 @@ export default function AddFriend() {
 
                 <div className="add__friend-body">
                     {
-                        userFounded.map((user, index) => {
+                        userFounded[0] === "notfound"
+                            ?
+                            <div className="add__friend-notfound">
+                                <h3>Không tìm thấy người dùng</h3>
+                            </div>
+                            :
+                            userFounded.map((user, index) =>
+                                <UserFound
 
-                            if (user === "skip") {
-                                console.log("skip")
-                                return (
-                                    <div className="add__friend-notfound" key={index}>
-                                        <h3>Không tìm thấy người dùng</h3>
-                                    </div>
-                                )
-                            } else {
-                                return (
-                                    <UserFound
-
-                                        key={index}
-                                        idFind={user.id}
-                                        displayName={user.displayName}
-                                        avatar={user.avatar}
-                                    />
-                                )
-                            }
-                        })
+                                    key={index}
+                                    idFind={user.id}
+                                    displayName={user.displayName}
+                                    avatar={user.avatar}
+                                    state={user.state}
+                                    key={index}
+                                />
+                            )
                     }
+
+
 
 
 

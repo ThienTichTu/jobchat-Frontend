@@ -4,10 +4,16 @@ import { ChangeBbtn, ChangePageName } from "../../redux/action/globalState"
 import { useState, useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import { previewImgChat } from "../../redux/action/globalState"
+
+
 export default function Navigation({ handleStay, handleBoo, boo }) {
     const barDom = useRef();
 
     const activeBtn = useSelector(state => state.Effect.btn_ActiveNav);
+
+    const chat_Preview = useSelector(state => state.Effect.imgPreviewChat);
+
 
 
     const dispatch = useDispatch();
@@ -110,6 +116,26 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                         <span>    Thêm bạn bè</span>
                     </div>
                 </div>
+                {
+
+                    chat_Preview.active &&
+                    <div>
+                        <div className="preview_img">
+                            <img src={chat_Preview.img} alt="" />
+                        </div>
+                        <div className="preview_img-close">
+                            <span
+                                onClick={() => {
+                                    URL.revokeObjectURL(chat_Preview.img)
+                                    dispatch(previewImgChat({ active: false, img: "" }))
+                                }}
+                            >
+                                Hủy
+                            </span>
+                        </div>
+                    </div>
+                }
+
             </div>
 
         </>

@@ -1,6 +1,7 @@
 import './App.scss';
 import Mainboard from './page/Mainboard'
 import Login from './page/Login';
+import PreviewImg from "./component/PreviewImg/PreviewImg"
 import ToastMessage from "./component/toastMessage/ToastMessage"
 import AddFriend from './component/addFriend/AddFriend';
 import MessSocket from './component/messSocket/MessSocket'
@@ -56,6 +57,7 @@ function App() {
 			<MessSocket />
 			<AddFriend />
 			<ToastMessage />
+			<PreviewImg />
 			{
 				islogin
 					? <Mainboard />
