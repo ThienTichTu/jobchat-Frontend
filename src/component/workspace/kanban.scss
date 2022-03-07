@@ -1,44 +1,48 @@
 .workspace {
     height: calc(100vh - 72px);
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(255, 254, 254);
     transition: all 0.4s linear;
+    overflow-y: auto;
     overflow-x: auto;
-    overflow-y: hidden;
 }
-.content {
-    height: calc(100vh - 72px);
+.list__kanban {
+    height: 50px;
+    width: 100%;
+    padding: 5px;
     display: flex;
-    min-width: 200vw;
-    background-color: #f2f3f4;
-    padding-left: 10px;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid #dbdbdb;
+    &-item {
+        min-width: 100px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        background-color: rgb(136, 204, 243);
+        padding: 5px;
+        text-align: center;
+        justify-content: center;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+}
+.kanban {
+    min-width: 1000px;
+    overflow-x: auto;
+    height: calc(100vh - 122px);
+    background-color: rgb(226, 225, 225);
+    display: flex;
+    padding: 5px;
     &-colum {
+        background-color: rgb(255, 255, 255);
+        height: 100%;
         width: 300px;
-        background-color: #fff;
+        padding: 4px;
+        flex: 0 0 auto;
+        overflow-y: auto;
     }
 }
-
-.content-colum + .content-colum {
+.kanban-colum + .kanban-colum {
     margin-left: 10px;
-}
-
-.NavSub {
-    width: 300px;
-    transition: all 0.4s linear;
-}
-.addProcess {
-    margin-left: 20px;
-    width: 300px;
-    height: 72px;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    span {
-        font-size: 20px;
-    }
-    &:hover {
-        background-color: rgb(72, 99, 235);
-        color: #fff;
-    }
 }
