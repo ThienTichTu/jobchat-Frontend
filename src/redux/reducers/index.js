@@ -5,6 +5,7 @@ import auth from './auth';
 import toastMessage from './toastmessage';
 import ChatRooms from './ChatRooms'
 import Togle from './togle';
+import ProjectManager from './ProjectManager'
 import { combineReducers } from "redux";
 
 const rootReducers = combineReducers({
@@ -14,6 +15,8 @@ const rootReducers = combineReducers({
     auth: auth,
     toast: toastMessage,
     togle: Togle,
-    ChatRooms: ChatRooms
+    ChatRooms: ChatRooms,
+    ProjectManager: ProjectManager
+
 });
 export default rootReducers;

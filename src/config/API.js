@@ -23,3 +23,7 @@ export const API_UPLOAD_AVATAR = `${host}/user/uploadAvatar`
 export const API_GET_FRIEND = `${host}/user/getFriend`
 
 export const API_UPLOAD_IMGCHAT = `${host}/chat/uploadImgChat`
+
+export const API_CREATE_PROJECT = `${host}/project/create`
+
+export const API_FIND_PROJECT = `${host}/project/find`

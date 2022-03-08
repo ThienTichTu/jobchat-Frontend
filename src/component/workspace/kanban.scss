@@ -31,18 +31,41 @@
     min-width: 1000px;
     overflow-x: auto;
     height: calc(100vh - 122px);
-    background-color: rgb(226, 225, 225);
+    background-color: #f2f3f4;
     display: flex;
     padding: 5px;
-    &-colum {
+    overflow-y: hidden;
+    &-column {
         background-color: rgb(255, 255, 255);
         height: 100%;
         width: 300px;
         padding: 4px;
         flex: 0 0 auto;
         overflow-y: auto;
+
+        &-name {
+            height: 50px;
+            line-height: 50px;
+            background-color: rgb(255, 255, 255);
+        }
+    }
+    &-card {
+        min-height: 200px;
+        width: 100%;
+        background-color: rgb(136, 204, 243);
     }
 }
-.kanban-colum + .kanban-colum {
-    margin-left: 10px;
+.kanban-column-warper + .kanban-column-warper {
+    margin-left: 20px;
+}
+.kanban-card + .kanban-card {
+    margin-top: 10px;
+}
+.kanban-column {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none !important;
+}
+.kanban-column::-webkit-scrollbar {
+    width: 0 !important;
+    display: none !important;
 }

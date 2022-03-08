@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { previewImgChat } from "../../redux/action/globalState"
+import { activeProjectManager } from '../../redux/action/ProjectManager'
 
 
 export default function Navigation({ handleStay, handleBoo, boo }) {
@@ -96,13 +97,18 @@ export default function Navigation({ handleStay, handleBoo, boo }) {
                             <span>    Tin nhắn</span>
                         </div>
                     </NavLink>
+
+                    <div
+                        className="nav__element"
+                        onClick={() => dispatch(activeProjectManager(true))}
+                    >
+                        <i className="fa-solid fa-diagram-project"></i>
+                        <span>    Dự án</span>
+                    </div>
+
                 </div>
 
                 <div className="nav__feature">
-                    <div className="nav__feature-element">
-                        <i className="fa-solid fa-plus"></i>
-                        <span>    Tạo Dự Án</span>
-                    </div>
                     <div className="nav__feature-element">
                         <i className="fa-solid fa-plus"></i>
                         <span>    Tạo nhóm chat</span>

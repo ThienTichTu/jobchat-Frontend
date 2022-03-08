@@ -10,7 +10,7 @@ import Kanban from '../component/workspace/Kanban'
 import Myjob from '../component/workspace/Myjob'
 import Chat from '../component/workspace/Chat'
 import Profile from '../component/workspace/Profile'
-import Card_detail from '../component/Card/Card_detail'
+
 import { socket } from '../config/Socketio'
 import { useSelector } from 'react-redux';
 
@@ -71,7 +71,7 @@ export default function Mainboard() {
                             </Route>
                         </Switch>
                     </div>
-                    <Card_detail />
+
                 </div>
 
             </Router>
