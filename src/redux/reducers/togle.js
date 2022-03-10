@@ -1,6 +1,11 @@
 export const initState = {
     addFriend: false,
-    messHeader: false
+    messHeader: false,
+    messDelete: {
+        active: false,
+        id: "",
+        data: {}
+    },
 }
 
 const Togle = (state = initState, action) => {
@@ -17,6 +22,13 @@ const Togle = (state = initState, action) => {
             return {
                 ...state,
                 messHeader: action.payload
+            };
+        }
+        case "MESSAGE_DELETE": {
+
+            return {
+                ...state,
+                messDelete: action.payload
             };
         }
 

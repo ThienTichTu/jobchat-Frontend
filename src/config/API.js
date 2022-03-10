@@ -27,3 +27,9 @@ export const API_UPLOAD_IMGCHAT = `${host}/chat/uploadImgChat`
 export const API_CREATE_PROJECT = `${host}/project/create`
 
 export const API_FIND_PROJECT = `${host}/project/find`
+
+export const API_GET_PROJECT = `${host}/project/get`
+
+export const API_ADD_PROCESS = `${host}/project/addprocess`
+
+export const API_DELETE_PROCESS = `${host}/project/deleteprocess`

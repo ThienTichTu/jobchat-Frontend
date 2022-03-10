@@ -2,22 +2,13 @@ import { useEffect, useState } from "react";
 import MyprojectDetail from "./MyprojectDetail";
 import { API_FIND_PROJECT } from "../../config/API"
 import axios from "axios";
-const backGround = [
-    "https://storage.googleapis.com/jobchat-35964.appspot.com/1646710434922.jpg",
-    "https://storage.googleapis.com/jobchat-35964.appspot.com/1646710485299.jpg",
-    "https://storage.googleapis.com/jobchat-35964.appspot.com/1646710501787.jpg",
-    "https://storage.googleapis.com/jobchat-35964.appspot.com/1646710518364.jpg"
-]
 
-function getRandomInt() {
-    return Math.floor(Math.random() * backGround.length);
-}
 
 export default function MyProject({ active }) {
 
     const [listProject, setListProject] = useState([])
 
-    const [projectDetail, setPeojectDetail] = useState(false)
+    const [projectDetail, setProjectDetail] = useState(false)
 
     useEffect(() => {
         axios.get(API_FIND_PROJECT, { withCredentials: true })
@@ -28,12 +19,12 @@ export default function MyProject({ active }) {
             .catch(err => console.log(err))
         return () => {
             setListProject([])
-            setPeojectDetail(false)
+            setProjectDetail(false)
         }
     }, [active])
 
     const handleSetDetailProject = (data) => {
-        setPeojectDetail(data)
+        setProjectDetail(data)
 
     }
 

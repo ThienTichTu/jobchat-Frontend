@@ -5,7 +5,6 @@ import PreviewImg from "./component/PreviewImg/PreviewImg"
 import ToastMessage from "./component/toastMessage/ToastMessage"
 import AddFriend from './component/addFriend/AddFriend';
 import MessSocket from './component/messSocket/MessSocket'
-import ProjectManager from './component/projectManager/ProjectManager'
 import axios from "axios"
 
 import { LogoutAction, LoginAction } from "./redux/action/auth"
@@ -59,7 +58,7 @@ function App() {
 			<AddFriend />
 			<ToastMessage />
 			<PreviewImg />
-			<ProjectManager />
+
 			{
 				islogin
 					? <Mainboard />

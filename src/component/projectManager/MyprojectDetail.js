@@ -2,10 +2,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios"
+import { useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import { Link } from 'react-router-dom'
+import { activeProjectManager, setIdProject } from '../../redux/action/ProjectManager'
+
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
+    const dispatch = useDispatch()
     return (
         <div
             className={className}
@@ -27,6 +32,7 @@ function SamplePrevArrow(props) {
 }
 
 function MyprojectDetail({ projectDetail }) {
+    const dispatch = useDispatch()
 
     const [st1, setSt1] = useState({
         speed: 500,
@@ -84,7 +90,10 @@ function MyprojectDetail({ projectDetail }) {
         }
     }, [projectDetail.memberManager.length, projectDetail.memberNomarl.length])
 
-
+    const handleRedirect = () => {
+        dispatch(activeProjectManager(false))
+        dispatch(setIdProject(projectDetail.id))
+    }
     return (
         <>
             <div ref={detailRef} className="myproject__detail">
@@ -141,8 +150,6 @@ function MyprojectDetail({ projectDetail }) {
                                 )
 
                             }
-
-
                         </Slider>
                     </div>
                 </div>
@@ -165,7 +172,15 @@ function MyprojectDetail({ projectDetail }) {
                     </div>
                 </div>
                 <div className="myproject__footer">
-                    <span>Xem chi tiết</span>
+                    <Link to={`/kanban/${projectDetail.id}`}>
+                        <span
+                            onClick={handleRedirect}
+                        >
+                            Xem chi tiết
+                        </span>
+                    </Link>
+
+
                 </div>
             </div>
 

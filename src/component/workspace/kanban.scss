@@ -4,27 +4,40 @@
     transition: all 0.4s linear;
     overflow-y: auto;
     overflow-x: auto;
+    position: relative;
 }
 .list__kanban {
     height: 50px;
-    width: 100%;
+    width: 1000px;
     padding: 5px;
     display: flex;
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid #dbdbdb;
-    &-item {
-        min-width: 100px;
-        height: 100%;
+    &-infor {
         display: flex;
         align-items: center;
-        background-color: rgb(136, 204, 243);
-        padding: 5px;
-        text-align: center;
-        justify-content: center;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-right: 10px;
-        cursor: pointer;
+        border-right: 1px solid #dbdbdb;
+
+        width: 600px;
+        justify-content: start;
+        .kanban-infor-background {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .kanban-infor-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-right: 20px;
+            text-align: center;
+        }
     }
 }
 .kanban {
@@ -42,11 +55,32 @@
         padding: 4px;
         flex: 0 0 auto;
         overflow-y: auto;
-
         &-name {
             height: 50px;
             line-height: 50px;
+            padding-left: 5px;
+            width: 200px;
+        }
+        &-header {
+            display: flex;
+            width: 100%;
+            height: 50px;
             background-color: rgb(255, 255, 255);
+        }
+        &-addcard {
+            width: 100px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 22px;
+            i {
+                cursor: pointer;
+                &:hover {
+                    transition: 1s;
+                    transform: rotate(180deg);
+                    -webkit-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                }
+            }
         }
     }
     &-card {
@@ -68,4 +102,83 @@
 .kanban-column::-webkit-scrollbar {
     width: 0 !important;
     display: none !important;
+}
+.member-slide {
+    display: flex;
+    width: 600px;
+    height: 100%;
+    margin-left: 20px;
+    .member-item {
+        margin-right: 10px;
+        cursor: pointer;
+        .member-item-img {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+.kanban-addprocess {
+    width: 300px;
+    padding: 5px;
+    height: 130px;
+    position: absolute;
+    z-index: 1000;
+    animation: slide ease-in-out 0.5s;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-around;
+    outline: 1px solid #dbdbdb;
+    input {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        outline: 1px solid #dbdbdb;
+        font-size: 20px;
+        padding-left: 10px;
+        animation: slideItem ease-in-out 0.5s;
+    }
+    &-btn {
+        display: block;
+        width: 100%;
+        height: 40px;
+        background-color: #fff;
+        text-align: center;
+        margin-top: 20px;
+        line-height: 40px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.8s ease-in-out;
+        animation: slideItem ease-in-out 0.5s;
+
+        &:hover {
+            background-color: #dbdbdb;
+        }
+    }
+}
+
+@keyframes slide {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 130px;
+    }
+}
+@keyframes slideItem {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 40px;
+    }
 }

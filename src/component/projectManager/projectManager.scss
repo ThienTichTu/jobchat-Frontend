@@ -3,13 +3,12 @@
     height: 100vh;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.294);
-    z-index: 10001;
-    display: none;
+    z-index: 100;
     &-container {
         width: 800px;
         height: 800px;
         background-color: rgb(255, 255, 255);
-        margin: auto auto;
+        margin: 20px auto;
         display: flex;
         flex-direction: column;
         border-radius: 10px;

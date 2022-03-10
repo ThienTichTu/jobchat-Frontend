@@ -1,5 +1,7 @@
 export const initState = {
-    active: false
+    active: false,
+    id: "",
+
 }
 
 const ProjectManager = (state = initState, action) => {
@@ -11,8 +13,21 @@ const ProjectManager = (state = initState, action) => {
                 active: action.payload
             };
         }
+        case "SET_PROJECT_ID": {
 
+            return {
+                ...state,
+                id: action.payload
+            };
+        }
 
+        case "SET_PROJECT": {
+
+            return {
+                ...state,
+                push: action.payload
+            };
+        }
         default: {
             return state;
         }
