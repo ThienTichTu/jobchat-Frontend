@@ -25,3 +25,16 @@ export const ChatRender = (detail) => {
         payload: detail
     }
 }
+
+export const getDataPreview = (detail) => {
+    return {
+        type: "PREVIEW_IMG",
+        payload: detail
+    }
+}
+export const previewImgChat = (detail) => {
+    return {
+        type: "PREVIEW_IMG_CHAT",
+        payload: detail
+    }
+}

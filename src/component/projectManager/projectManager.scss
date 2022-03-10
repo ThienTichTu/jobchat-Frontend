@@ -1,0 +1,329 @@
+.project__manager {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.294);
+    z-index: 100;
+    &-container {
+        width: 800px;
+        height: 800px;
+        background-color: rgb(255, 255, 255);
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    &-header {
+        border-bottom: 1px solid rgb(228, 228, 228);
+        height: 50px;
+        display: flex;
+        .header-item {
+            height: 100%;
+            width: 200px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            margin-right: 5px;
+            cursor: pointer;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    }
+    &-body {
+        padding: 5px;
+        height: 100%;
+        width: 100%;
+        // background-color: rgb(228, 228, 228);
+    }
+    &-close {
+        align-self: center;
+        margin-left: auto;
+        font-size: 30px;
+        width: 50px;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+.add_project {
+    &-name {
+        margin-top: 20px;
+        span {
+            display: block;
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0.7;
+        }
+        input {
+            margin-top: 10px;
+            height: 40px;
+            width: 100%;
+            padding-left: 10px;
+            border-radius: 5px;
+            font-size: 22px;
+            border: 1px solid #dbdbdb;
+            outline: none;
+        }
+        border-bottom: 1px solid rgb(172, 170, 170);
+        height: 100px;
+    }
+    &-member {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        span {
+            display: block;
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0.7;
+        }
+        .member-container {
+            height: 500px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+        }
+        .member-list-choose {
+            width: 50%;
+            height: 100%;
+            padding: 5px;
+        }
+        .member-list-friend {
+            width: 50%;
+            height: 100%;
+            overflow-y: auto;
+            border: 1px solid #dbdbdb;
+            padding: 5px;
+        }
+        .member-item-friend {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            border: 1px solid #dbdbdb;
+            cursor: pointer;
+            .member-item-avatar {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .member-item-name {
+                font-size: 18px;
+                font-weight: 500;
+                margin-left: 10px;
+            }
+            &:hover {
+                background-color: #dbdbdb;
+            }
+        }
+        .member-item-choose {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            .member-item-avatar {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .member-item-name {
+                font-size: 18px;
+                font-weight: 500;
+                margin-left: 10px;
+            }
+            .member-item-role {
+                display: block;
+                margin-left: auto;
+                font-size: 16px;
+                font-weight: 500;
+                padding: 10px 15px;
+                width: 150px;
+                background-color: #dbdbdb;
+                border-radius: 20px;
+                color: rgb(54, 119, 0);
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+    &-footer {
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        span {
+            display: block;
+            margin-left: auto;
+            padding: 15px 10px;
+            background-color: rgb(1, 187, 1);
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
+.member-item-friend + .member-item-friend {
+    margin-top: 10px;
+}
+.member-item-choose + .member-item-choose {
+    margin-top: 20px;
+}
+.myproject {
+    &__container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+    }
+    &__list {
+        display: flex;
+        height: 50%;
+        width: 100%;
+        background-color: #fff;
+        overflow-y: auto;
+        border-bottom: 1px solid #dbdbdb;
+        flex-wrap: wrap;
+        &-item {
+            width: 100px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+        span {
+            text-align: center;
+            display: block;
+            margin-top: auto;
+            height: 30px;
+        }
+        &-background {
+            width: 100%;
+            height: 120px;
+            img {
+                width: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    &__detail {
+        height: 50%;
+        width: 100%;
+        margin-top: 10px;
+        display: none;
+        &-name {
+            span {
+                font-size: 22px;
+                font-weight: bold;
+            }
+        }
+        &-manager {
+            align-items: center;
+            margin-top: 10px;
+            display: flex;
+            .manager-title {
+                font-size: 20px;
+                margin-right: 10px;
+                line-height: 50px;
+                width: 150px;
+            }
+        }
+        .manager-item {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            border-radius: 40px;
+            margin-right: 20px;
+            text-align: center;
+            justify-content: start;
+            &-img {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+                margin-right: 10px;
+                align-self: center;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        &-data {
+            margin-top: 10px;
+            height: 150px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid #dbdbdb;
+            text-align: center;
+            .data-column {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                justify-content: center;
+                text-align: center;
+                font-size: 22px;
+                font-weight: bold;
+                flex: 1;
+                border-right: 1px solid #dbdbdb;
+                &-name {
+                    height: 75px;
+                    width: 100%;
+                }
+            }
+            .data-card {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                justify-content: center;
+                text-align: center;
+                font-size: 22px;
+                font-weight: bold;
+                flex: 1;
+                &-name {
+                    height: 75px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    &__footer {
+        margin-top: 15px;
+        display: flex;
+        span {
+            display: block;
+            margin-left: auto;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: rgb(0, 231, 116);
+        }
+    }
+}
+.manager-slick {
+    width: calc(100% - 200px);
+}

@@ -10,7 +10,9 @@ import Kanban from '../component/workspace/Kanban'
 import Myjob from '../component/workspace/Myjob'
 import Chat from '../component/workspace/Chat'
 import Profile from '../component/workspace/Profile'
-import Card_detail from '../component/Card/Card_detail'
+import ProjectManager from '../component/projectManager/ProjectManager'
+import Card_detail from '../component/Cardetail/Card_detail'
+import ToastDelete from "../component/toastMessage/ToastDelete"
 import { socket } from '../config/Socketio'
 import { useSelector } from 'react-redux';
 
@@ -28,6 +30,7 @@ export default function Mainboard() {
     }, [])
 
 
+
     useEffect(() => {
         if (activeBtn) {
             barsub.current.style.marginLeft = '0';
@@ -40,8 +43,11 @@ export default function Mainboard() {
         <>
             <Router >
                 <div>
+                    <ToastDelete />
                     <Header />
                     <Navigation />
+                    <Card_detail />
+                    <ProjectManager />
 
                     <div ref={barsub} className='barsub_ef'>
                         <Switch>
@@ -50,9 +56,8 @@ export default function Mainboard() {
 
                                 />
                             </Route> */}
-                            <Route path="/kanban" exact>
+                            <Route path="/kanban/:id" exact>
                                 <Kanban
-
                                 />
                             </Route>
                             <Route path="/chat" exact >
@@ -71,7 +76,7 @@ export default function Mainboard() {
                             </Route>
                         </Switch>
                     </div>
-                    <Card_detail />
+
                 </div>
 
             </Router>

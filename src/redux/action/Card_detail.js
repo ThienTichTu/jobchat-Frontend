@@ -5,16 +5,16 @@ export const showDetail = (detail) => {
     }
 }
 
-export const changeDetail = (detail) => {
+export const closeCardDetail = (detail) => {
     return {
-        type: "CHANGE_DETAIL",
+        type: "CLOSE_CARD_ADD",
         payload: detail,
     }
 }
 
-export const closeDetail = detail => {
+export const activeCardDetail = detail => {
     return {
-        type: "CLOSE_DETAIL",
+        type: "ACTIVE_CARD_ADD",
         payload: detail,
     }
 }

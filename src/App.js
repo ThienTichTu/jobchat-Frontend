@@ -1,10 +1,12 @@
 import './App.scss';
 import Mainboard from './page/Mainboard'
 import Login from './page/Login';
+import PreviewImg from "./component/PreviewImg/PreviewImg"
 import ToastMessage from "./component/toastMessage/ToastMessage"
 import AddFriend from './component/addFriend/AddFriend';
 import MessSocket from './component/messSocket/MessSocket'
 import axios from "axios"
+
 import { LogoutAction, LoginAction } from "./redux/action/auth"
 import { increaseMess } from "./redux/action/globalState"
 import { API_AUTH } from "./config/API"
@@ -44,7 +46,6 @@ function App() {
 							return init
 						}
 					}, 0)
-					console.log("auth set cout mess ", messcout)
 					dispatch(increaseMess(messcout))
 				}
 			})
@@ -56,6 +57,8 @@ function App() {
 			<MessSocket />
 			<AddFriend />
 			<ToastMessage />
+			<PreviewImg />
+
 			{
 				islogin
 					? <Mainboard />

@@ -1,44 +1,184 @@
 .workspace {
     height: calc(100vh - 72px);
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(255, 254, 254);
     transition: all 0.4s linear;
+    overflow-y: auto;
     overflow-x: auto;
-    overflow-y: hidden;
+    position: relative;
 }
-.content {
-    height: calc(100vh - 72px);
+.list__kanban {
+    height: 50px;
+    width: 1000px;
+    padding: 5px;
     display: flex;
-    min-width: 200vw;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid #dbdbdb;
+    &-infor {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid #dbdbdb;
+
+        width: 600px;
+        justify-content: start;
+        .kanban-infor-background {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 10px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .kanban-infor-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-right: 20px;
+            text-align: center;
+        }
+    }
+}
+.kanban {
+    min-width: 1000px;
+    overflow-x: auto;
+    height: calc(100vh - 122px);
     background-color: #f2f3f4;
-    padding-left: 10px;
-    &-colum {
-        width: 300px;
-        background-color: #fff;
-    }
-}
-
-.content-colum + .content-colum {
-    margin-left: 10px;
-}
-
-.NavSub {
-    width: 300px;
-    transition: all 0.4s linear;
-}
-.addProcess {
-    margin-left: 20px;
-    width: 300px;
-    height: 72px;
-    background-color: #fff;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    span {
-        font-size: 20px;
+    padding: 5px;
+    overflow-y: hidden;
+    &-column {
+        background-color: rgb(255, 255, 255);
+        height: 100%;
+        width: 300px;
+        padding: 4px;
+        flex: 0 0 auto;
+        overflow-y: auto;
+        &-name {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 5px;
+            width: 200px;
+        }
+        &-header {
+            display: flex;
+            width: 100%;
+            height: 50px;
+            background-color: rgb(255, 255, 255);
+        }
+        &-addcard {
+            width: 100px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 22px;
+            i {
+                cursor: pointer;
+                &:hover {
+                    transition: 1s;
+                    transform: rotate(180deg);
+                    -webkit-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                }
+            }
+        }
     }
-    &:hover {
-        background-color: rgb(72, 99, 235);
-        color: #fff;
+    &-card {
+        min-height: 200px;
+        width: 100%;
+        background-color: rgb(136, 204, 243);
+    }
+}
+.kanban-column-warper + .kanban-column-warper {
+    margin-left: 20px;
+}
+.kanban-card + .kanban-card {
+    margin-top: 10px;
+}
+.kanban-column {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none !important;
+}
+.kanban-column::-webkit-scrollbar {
+    width: 0 !important;
+    display: none !important;
+}
+.member-slide {
+    display: flex;
+    width: 600px;
+    height: 100%;
+    margin-left: 20px;
+    .member-item {
+        margin-right: 10px;
+        cursor: pointer;
+        .member-item-img {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+.kanban-addprocess {
+    width: 300px;
+    padding: 5px;
+    height: 130px;
+    position: absolute;
+    z-index: 1000;
+    animation: slide ease-in-out 0.5s;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-around;
+    outline: 1px solid #dbdbdb;
+    input {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        outline: 1px solid #dbdbdb;
+        font-size: 20px;
+        padding-left: 10px;
+        animation: slideItem ease-in-out 0.5s;
+    }
+    &-btn {
+        display: block;
+        width: 100%;
+        height: 40px;
+        background-color: #fff;
+        text-align: center;
+        margin-top: 20px;
+        line-height: 40px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.8s ease-in-out;
+        animation: slideItem ease-in-out 0.5s;
+
+        &:hover {
+            background-color: #dbdbdb;
+        }
+    }
+}
+
+@keyframes slide {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 130px;
+    }
+}
+@keyframes slideItem {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 40px;
     }
 }

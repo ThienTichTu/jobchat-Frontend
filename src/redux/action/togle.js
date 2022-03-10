@@ -12,3 +12,10 @@ export const Mess_Active = (detail) => {
     }
 }
 
+export const MessDelete = (detail) => {
+    return {
+        type: "MESSAGE_DELETE",
+        payload: detail
+    }
+}
+

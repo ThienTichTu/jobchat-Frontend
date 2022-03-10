@@ -72,3 +72,28 @@
     display: block;
     color: #fff;
 }
+.preview_img {
+    width: 90%;
+    max-height: 500px;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+    }
+    margin: 0 auto;
+    &-close {
+        text-align: end;
+        width: 90%;
+        height: 30px;
+        color: rgb(255, 255, 255);
+        margin: 10px auto 0px;
+        span {
+            background-color: rgb(255, 99, 99);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+}

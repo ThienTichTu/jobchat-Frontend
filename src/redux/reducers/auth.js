@@ -8,7 +8,6 @@ const initState = {
 const auth = (state = initState, action) => {
     switch (action.type) {
         case "LOG_OUT": {
-            console.log("logout")
             return { ...state, login: action.payload, user: {} };
         }
         case "LOG_IN": {
