@@ -27,17 +27,15 @@ export default function ToastDelete() {
                 url: API_DELETE_PROCESS,
                 data: {
                     id: toggle.id,
-                    idproject: toggle.idProject
                 },
                 withCredentials: true,
             })
                 .then(rs => {
-                    console.log(rs.data)
-                    dispatch(MessDelete({ active: false, id: "", idProject: "", data: rs.data }))
+                    dispatch(MessDelete({ active: false, id: "", idProject: "", data: toggle.id }))
                 })
                 .catch(err => console.error(err))
         } else {
-            dispatch(MessDelete({ active: false, id: "", idProject: "", data: {} }))
+            dispatch(MessDelete({ active: false, id: "", idProject: "", data: false }))
 
         }
 

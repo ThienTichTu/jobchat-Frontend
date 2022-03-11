@@ -95,7 +95,7 @@ const Card_detail = () => {
                         "marginRight": "auto",
                         "paddingLeft": "5px"
                     }}
-                >Thêm công việc</h2>
+                >Chi tiết công việc</h2>
                 <i
                     className="fa-solid fa-xmark"
                     onClick={() => dispatch(closeCardDetail(false))}

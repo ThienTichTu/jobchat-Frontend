@@ -7,7 +7,7 @@ export const initState = {
 const toastMessage = (state = initState, action) => {
     switch (action.type) {
         case "TOAST": {
-            console.log("toast ==> ", action.payload)
+
             return {
                 ...state,
                 active: true,
@@ -16,7 +16,7 @@ const toastMessage = (state = initState, action) => {
             };
         }
         case "TOAST_REFESH": {
-            console.log("toast ==> ", action.payload)
+
             return {
                 ...state,
                 active: false,

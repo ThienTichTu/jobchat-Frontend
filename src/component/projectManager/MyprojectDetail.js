@@ -159,7 +159,7 @@ function MyprojectDetail({ projectDetail }) {
                             Số tiến trình
                         </span>
                         <span className="data-column-number">
-                            10
+                            {projectDetail.columns}
                         </span>
                     </div>
                     <div className="data-card">
@@ -167,7 +167,8 @@ function MyprojectDetail({ projectDetail }) {
                             Số task
                         </span>
                         <span className="data-card-number">
-                            10
+                            {projectDetail.cards}
+
                         </span>
                     </div>
                 </div>
