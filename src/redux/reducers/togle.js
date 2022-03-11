@@ -4,7 +4,7 @@ export const initState = {
     messDelete: {
         active: false,
         id: "",
-        data: {}
+        data: false
     },
 }
 

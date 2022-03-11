@@ -1,7 +1,9 @@
 const initState = {
     activeCreate: false,
     idColumn: {},
-    infor: {}
+    idProject: "",
+    infor: {},
+    data: false
 }
 
 const CardDetailReducers = (state = initState, action) => {
@@ -18,7 +20,8 @@ const CardDetailReducers = (state = initState, action) => {
                 ...state,
                 activeCreate: action.payload.active,
                 idColumn: action.payload.column,
-                infor: action.payload.infor
+                infor: action.payload.infor,
+                data: action.payload.data
             };
         }
         default: {

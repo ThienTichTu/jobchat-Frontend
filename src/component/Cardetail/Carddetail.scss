@@ -64,11 +64,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #6a96cc;
+        }
         span {
             font-size: 22px;
             font-weight: bold;
             color: #fff;
-            cursor: pointer;
         }
     }
     &-name {

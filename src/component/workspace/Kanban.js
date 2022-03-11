@@ -14,6 +14,7 @@ import { ToastAcction } from "../../redux/action/toast"
 import { activeCardDetail } from "../../redux/action/Card_detail"
 import { MessDelete } from "../../redux/action/togle"
 import { useSelector } from "react-redux"
+import { API_LOCATION_CARD } from "../../config/API"
 const setting = {
     speed: 500,
     slidesToShow: 1,
@@ -50,34 +51,30 @@ export default function Kanban() {
     const [members, setMembers] = useState([])
     const [nameProcess, setNameProcess] = useState("")
 
+    const dataAddCard = useSelector(state => state.CardDetailReducers)
+
     const deleteColumn = useSelector(state => state.togle.messDelete)
 
+    const toggle = useSelector(state => state.togle.messDelete)
     useEffect(() => {
 
         if (id) {
             axios.get(`${API_GET_PROJECT}/${id}`, { withCredentials: true })
                 .then(rs => {
-                    const { name, backGround, date_create, memberNomarl, memberManager, id, column, ...process } = rs.data
-                    var sortable = [];
+                    const { name, backGround, date_create, memberNomarl, memberManager, id, column } = rs.data.infor
 
-                    for (var vehicle in process) {
-                        sortable.push([vehicle, process[vehicle]]);
-                    }
-                    sortable.sort(function (a, b) {
-                        return a[1].stt - b[1].stt;
-                    });
-                    const obj = Object.fromEntries(sortable);
 
-                    setInforProject({ name, backGround, date_create })
+                    setInforProject({ name, backGround, date_create, id })
                     var member = _.concat(memberNomarl, memberManager);
-                    setColumns(obj)
+
+                    setColumns(rs.data.columns)
                     setMembers(member)
                     dispatch(setIdProject(id))
 
                 })
                 .catch(err => console.log(err))
         }
-    }, [id, deleteColumn.data])
+    }, [id])
 
     const handlePropEnd = (data, columns, setColumns) => {
         const { source, destination } = data;
@@ -88,9 +85,7 @@ export default function Kanban() {
             const columnSource = columns[source.droppableId]
             const coppiesItemSource = columnSource.item
             const [remove] = coppiesItemSource.splice(source.index, 1)
-
             coppieitem.splice(destination.index, 0, remove)
-
             setColumns({
                 ...columns,
                 [source.droppableId]: {
@@ -102,6 +97,22 @@ export default function Kanban() {
                     item: coppieitem
                 }
             })
+            const dataLocation = {
+                source: source.droppableId,
+                des: destination.droppableId,
+                item: remove
+            }
+            axios({
+                method: 'post',
+                url: API_LOCATION_CARD,
+                data: dataLocation,
+                withCredentials: true,
+            })
+                .then((rs) => {
+                    console.log(rs.data)
+                })
+                .catch(err => console.error(err))
+
         } else {
             const column = columns[source.droppableId]
             const coppiesItem = column.item
@@ -114,8 +125,11 @@ export default function Kanban() {
                     item: coppiesItem
                 }
             })
+
         }
     }
+
+
 
     const handleSlideAdd = () => {
 
@@ -151,7 +165,7 @@ export default function Kanban() {
     const handleAddCard = (id, name) => {
         dispatch(activeCardDetail(
             {
-                active: true, column: { id, name: name }, infor: { ...inforProject, members }
+                active: true, column: { id, name: name }, infor: { ...inforProject, members }, data: false
 
             }))
     }
@@ -160,6 +174,26 @@ export default function Kanban() {
         dispatch(MessDelete({ active: true, id: idProcess, idProject: id }))
     }
 
+    useEffect(() => {
+        if (toggle.data) {
+            const newColumns = { ...columns }
+            delete newColumns[toggle.data]
+            setColumns(newColumns)
+            dispatch(ToastAcction({ type: "success", mess: "Xóa tiến trình thành công !" }))
+
+        }
+    }, [toggle.data])
+
+    useEffect(() => {
+        if (dataAddCard.data) {
+            console.log(dataAddCard.data)
+            columns[dataAddCard.data.idProcess].item.unshift(dataAddCard.data)
+            const newColumns = { ...columns }
+            setColumns(newColumns)
+            dispatch(ToastAcction({ type: "success", mess: "Tạo công việc mới thành công !" }))
+
+        }
+    }, [dataAddCard.data])
 
     return (
         <>

@@ -33,3 +33,5 @@ export const API_GET_PROJECT = `${host}/project/get`
 export const API_ADD_PROCESS = `${host}/project/addprocess`
 
 export const API_DELETE_PROCESS = `${host}/project/deleteprocess`
+export const API_CREATE_CARD = `${host}/project/createcard`
+export const API_LOCATION_CARD = `${host}/project/updatecardlocation`
