@@ -1,51 +1,47 @@
-import "./Carddetail.scss"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./Carddetail.scss"
+import { socket } from "../../config/Socketio"
+
+import Card_detailChat from "./Card_detailChat"
+import { memo, useState, useRef, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { closeCardDetailUpdate, activeCardDetail } from "../../redux/action/Card_detail"
+import { API_DATAUPDATE_CARD, API_DELETE_CARD } from "../../config/API"
 import formatDatVn from "../../config/setDateVn"
-import { memo, useRef, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux";
-import { activeCardDetail, closeCardDetail } from "../../redux/action/Card_detail"
+import axios from "axios";
 
-import { API_CREATE_CARD } from "../../config/API"
-import axios from "axios"
-
-const setting = {
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-}
-
-const Card_detail = () => {
+function Card_detail_update() {
+    const data = useSelector(state => state.CardDetailUpdate)
+    console.log(data)
+    const listMember = useSelector(state => state.ProjectManager.Members)
     const dispatch = useDispatch()
-    const cardRef = useRef()
-    const data = useSelector(state => state.CardDetailReducers)
-
     const [name, setName] = useState("")
-    const [listmember, setListmember] = useState([])
 
     const [listMaker, setListMaker] = useState([])
-
-    const [selectDate, setSelectDate] = useState()
-
+    const [selectDate, setSelectDate] = useState();
+    const [newDate, setNewDate] = useState("")
     const [description, setDescription] = useState("")
-
+    const cardRef = useRef()
+    const [dataChat, setDataChat] = useState([])
 
     useEffect(() => {
-        if (data.activeCreate) {
+        if (data.active) {
             cardRef.current.style.display = "block"
+            setNewDate(data.data.dealine)
+            setDescription(data.data.description)
+            setListMaker(data.data.maker)
+            setName(data.data.nameCard)
         } else {
             cardRef.current.style.display = "none"
         }
-        const newMember = data.infor.members || []
-        setListmember(newMember)
-        return () => {
-            setSelectDate("")
-            setListMaker([])
-        }
-    }, [data.activeCreate])
+    }, [data.active, data.data])
 
-    const handleSetMaker = (user, op, index) => {
+    useEffect(() => {
+
+    })
+
+    const handleSetList = (user, op, index) => {
         if (!listMaker.includes(user) && op === "add") {
             setListMaker([...listMaker, user])
         } else if (listMaker.includes(user) && op === "remove") {
@@ -53,141 +49,211 @@ const Card_detail = () => {
             setListMaker([...listMaker])
         }
     }
+    const handleUpdate = () => {
 
-    const handleCreateCard = () => {
-        const day = formatDatVn(selectDate)
-
+        const newlist = listMaker.map(item => item.id)
         const newCard = {
-            idProcess: data.idColumn.id,
-            idProject: data.infor.id,
             nameCard: name,
-            maker: listMaker,
+            dealine: newDate,
             description: description,
-            dealine: day || "Không có",
+            id: data.data.id,
+            idProcess: data.data.idProcess,
+            idProject: data.data.idProject,
+            maker: newlist,
         }
         axios({
             method: "POST",
-            url: API_CREATE_CARD,
-            data: newCard,
+            url: API_DATAUPDATE_CARD,
+            data: {
+                card: newCard
+            },
             withCredentials: true,
         })
-            .then((rs) => {
-
-                newCard.id = rs.data
+            .then(rs => {
+                newCard.maker = listMaker
                 dispatch(activeCardDetail(
                     {
-                        active: false, column: { id: data.idColumn.id }, infor: {}, data: newCard
-
+                        active: false, column: { id: data.data.idProcess }, infor: {}, data: {
+                            ...newCard,
+                            state: "update",
+                            index: data.index,
+                        }
                     }))
-                setSelectDate("")
-                setListMaker([])
-                setName("")
-
             })
-            .catch((err) => console.log(err))
+            .catch(err => console.log(err))
+
     }
 
+    const handleDelete = () => {
+
+        axios({
+            method: "POST",
+            url: API_DELETE_CARD,
+            data: {
+                id: data.data.id,
+                idRoom: data.data.chatRoom
+            },
+            withCredentials: true,
+        })
+            .then(rs => {
+                if (rs.data === "ok") {
+                    dispatch(activeCardDetail(
+                        {
+                            active: false, column: { id: data.data.idProcess }, infor: {}, data: {
+                                state: "delete",
+                                index: data.index,
+                                id: data.data.id,
+                                idProcess: data.data.idProcess
+                            }
+                        }))
+                    dispatch(closeCardDetailUpdate(false))
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+
+
     return (
-        <div ref={cardRef} className="card-detail">
-            <div className="card-detail-header">
-                <h2
-                    style={{
-                        "marginRight": "auto",
-                        "paddingLeft": "5px"
-                    }}
-                >Chi tiết công việc</h2>
-                <i
-                    className="fa-solid fa-xmark"
-                    onClick={() => dispatch(closeCardDetail(false))}
-                ></i>
+
+        <div ref={cardRef} className="card-detail-update" >
+            <div className="card-detail-header2">
+
+                <h3>Chi tiết công việc</h3>
+
+
+                <div>
+                    <i
+                        style={{ marginRight: "30px" }}
+                        className="fa-solid fa-trash"
+                        onClick={() => handleDelete()}
+                    ></i>
+                    <i
+                        className="fa-solid fa-xmark"
+                        onClick={() => dispatch(closeCardDetailUpdate(false))}
+                    ></i>
+                </div>
             </div>
-            <div className="card-detail-body">
+            <div className="card-detail-body2">
                 <input
                     type="text"
-                    value={name}
                     className="card-detail-name"
-                    placeholder={`Nhập tên công việc`}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <span className="card-name-parent">
-                    Tên dự án:  {data.infor.name}
-                </span>
-                <span className="card-name-parent">
-                    Tên tiến trình : {data.idColumn.name}
-                </span>
-                <div className="card-list-member">
-
-                    {
-                        listmember.map((member, index) =>
-
-                            <div key={index}>
-                                <div className="card-list-item">
-                                    <div
-                                        className="itemImg"
-                                        onClick={() => handleSetMaker(member, "add")}
-                                    >
-                                        <img src={member.avatar} alt="" />
-                                    </div>
-                                </div>
-
-                            </div>
-                        )
-
-                    }
-
+                <div className="body2-process">
+                    <span>
+                        Tên tiến trình: Hoàn Thành
+                    </span>
                 </div>
-                <span className="card-title">
-                    Người thực hiện:
-                </span>
-                <div className="card-list-maker">
+                <div className="body2-listmember">
                     {
-                        listMaker.map((member, index) => (
+                        listMember.map((member, index) =>
                             <div
                                 key={index}
-                                className="card-list-item"
-                                style={{ "marginTop": "10px" }}
-                                onClick={() => handleSetMaker(member, "remove", index)}
+                                className="body2-listmember-item"
+                                onClick={() => handleSetList(member, "add")}
                             >
-                                <div className="itemImg">
-                                    <img src={member.avatar} alt="" />
-                                </div>
-                                <span>
-                                    {member.displayName}
-                                </span>
+                                <img src={member.avatar} alt="" />
                             </div>
-                        ))
+                        )
                     }
 
                 </div>
 
-                <div className="card-deline">
+                <span style={{ "marginTop": "20px", "marginBottom": "10px" }}>
+                    Người thực hiện:
+                </span>
+                <div className="body2-listmaker">
+                    {
+                        listMaker.map((item, index) =>
+                            <div
+                                key={index}
+                                className="body2-listmaker-item"
+                                onClick={() => handleSetList(item, "remove", index)}
+
+                            >
+                                <div className="body2-listmember-item">
+                                    <img src={item.avatar} alt="" />
+                                </div>
+                                <span>
+                                    {item.displayName}
+                                </span>
+                            </div>
+                        )
+                    }
+
+                </div>
+
+                <div
+                    className="card-deline"
+
+                >
 
                     <i className="fa-solid fa-clock"></i>
                     <span>
                         Kết thúc :
                     </span>
-                    <DatePicker selected={selectDate} onChange={(date) => setSelectDate(date)} minDate={new Date()} />
+                    <div>
+                        <DatePicker selected={selectDate} onChange={(date) => {
+                            setSelectDate(date)
+                            const day = formatDatVn(date)
+                            setNewDate(day)
+
+                        }} minDate={new Date()} />
+
+                    </div>
+                    <span
+                        style={{
+                            "fontWeight": "bold",
+                            "marginLeft": "10px",
+                            "color": newDate === "Không có" ? "green" : "red"
+                        }}
+                    >
+                        {newDate}
+                    </span>
+                    <i
+                        className="fa-solid fa-xmark"
+                        style={{
+                            "cursor": "pointer"
+                        }}
+                        onClick={() => setNewDate("Không có")}
+                    ></i>
+
                 </div>
                 <div className="card-des">
                     <span>Mô tả công việc</span>
                     <textarea
-                        name="" id="" cols="30" rows="10"
+
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="Nhập mô tả công việc...."
                     ></textarea>
                 </div>
+                <span style={{ marginTop: "20px", fontSize: "18px", marginBottom: "5px" }} >Hoạt động:</span>
+                {/* activity */}
+
+                <Card_detailChat
+                    idRoom={data.data.chatRoom}
+                    listMember={listMember}
+                    manager={data.data.manager}
+                    nameCard={data.data.nameCard}
+                />
             </div>
 
             <div
                 className="card-detail-footer"
-                onClick={handleCreateCard}
+                style={{
+                    "backgroundColor": "#10cf10",
+
+                }}
+                onClick={handleUpdate}
             >
-                <span>Tạo công việc</span>
+                <span>Lưu</span>
             </div>
         </div>
     )
-
 }
 
-export default memo(Card_detail)
+export default Card_detail_update

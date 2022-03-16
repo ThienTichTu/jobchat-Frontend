@@ -35,3 +35,9 @@ export const API_ADD_PROCESS = `${host}/project/addprocess`
 export const API_DELETE_PROCESS = `${host}/project/deleteprocess`
 export const API_CREATE_CARD = `${host}/project/createcard`
 export const API_LOCATION_CARD = `${host}/project/updatecardlocation`
+//updatecard-data
+export const API_DATAUPDATE_CARD = `${host}/project/updatecard-data`
+export const API_DELETE_CARD = `${host}/project/deletecard-data`
+export const API_GETCHAT_CARD = `${host}/project/chat`
+//uploadImgChatCard
+export const API_UPLOAD_IMGCHATCARD = `${host}/chat/uploadImgChatCard`

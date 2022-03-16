@@ -3,7 +3,7 @@ const initState = {
     idColumn: {},
     idProject: "",
     infor: {},
-    data: false
+    data: false,
 }
 
 const CardDetailReducers = (state = initState, action) => {
@@ -16,12 +16,14 @@ const CardDetailReducers = (state = initState, action) => {
         }
 
         case "ACTIVE_CARD_ADD": {
+
             return {
                 ...state,
                 activeCreate: action.payload.active,
                 idColumn: action.payload.column,
                 infor: action.payload.infor,
-                data: action.payload.data
+                data: action.payload.data,
+
             };
         }
         default: {

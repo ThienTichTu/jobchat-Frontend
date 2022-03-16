@@ -8,7 +8,7 @@ import { API_GET_PROJECT, API_ADD_PROCESS } from "../../config/API"
 import _ from 'lodash'
 import Colum from "../Kanban/Colum"
 import axios from 'axios'
-import { setIdProject } from '../../redux/action/ProjectManager'
+import { setIdProject, setProjectMember } from '../../redux/action/ProjectManager'
 import { useDispatch } from 'react-redux'
 import { ToastAcction } from "../../redux/action/toast"
 import { activeCardDetail } from "../../redux/action/Card_detail"
@@ -50,7 +50,7 @@ export default function Kanban() {
     const [inforProject, setInforProject] = useState({})
     const [members, setMembers] = useState([])
     const [nameProcess, setNameProcess] = useState("")
-
+    const [manager, setManager] = useState([])
     const dataAddCard = useSelector(state => state.CardDetailReducers)
 
     const deleteColumn = useSelector(state => state.togle.messDelete)
@@ -62,14 +62,13 @@ export default function Kanban() {
             axios.get(`${API_GET_PROJECT}/${id}`, { withCredentials: true })
                 .then(rs => {
                     const { name, backGround, date_create, memberNomarl, memberManager, id, column } = rs.data.infor
-
-
                     setInforProject({ name, backGround, date_create, id })
                     var member = _.concat(memberNomarl, memberManager);
-
+                    setManager(memberManager)
                     setColumns(rs.data.columns)
                     setMembers(member)
                     dispatch(setIdProject(id))
+                    dispatch(setProjectMember(member))
 
                 })
                 .catch(err => console.log(err))
@@ -109,7 +108,7 @@ export default function Kanban() {
                 withCredentials: true,
             })
                 .then((rs) => {
-                    console.log(rs.data)
+
                 })
                 .catch(err => console.error(err))
 
@@ -165,7 +164,7 @@ export default function Kanban() {
     const handleAddCard = (id, name) => {
         dispatch(activeCardDetail(
             {
-                active: true, column: { id, name: name }, infor: { ...inforProject, members }, data: false
+                active: true, column: { id, name: name }, infor: { ...inforProject, members, manager }, data: false
 
             }))
     }
@@ -185,15 +184,36 @@ export default function Kanban() {
     }, [toggle.data])
 
     useEffect(() => {
-        if (dataAddCard.data) {
-            console.log(dataAddCard.data)
+        if (dataAddCard.data.state === "create") {
+
             columns[dataAddCard.data.idProcess].item.unshift(dataAddCard.data)
             const newColumns = { ...columns }
             setColumns(newColumns)
             dispatch(ToastAcction({ type: "success", mess: "Tạo công việc mới thành công !" }))
 
+        } else {
+            if (dataAddCard.data.state === "update") {
+                const { state, index, ...newcard } = dataAddCard.data;
+                if (index || index === 0) {
+
+                    columns[dataAddCard.data.idProcess].item.splice(index, 1)
+                    columns[dataAddCard.data.idProcess].item.splice(index, 0, newcard)
+                    const newColumns = { ...columns }
+                    setColumns({ ...newColumns })
+                }
+            }
+            if (dataAddCard.data.state === "delete") {
+                const { state, index } = dataAddCard.data;
+
+                if (index || index === 0) {
+                    columns[dataAddCard.data.idProcess].item.splice(index, 1)
+                    const newColumns = { ...columns }
+                    setColumns({ ...newColumns })
+                }
+            }
         }
-    }, [dataAddCard.data])
+
+    }, [dataAddCard.data, dataAddCard.data.state])
 
     return (
         <>

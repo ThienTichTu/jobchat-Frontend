@@ -6,8 +6,9 @@ import { memo, useRef, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { activeCardDetail, closeCardDetail } from "../../redux/action/Card_detail"
-
+import { socket } from "../../config/Socketio"
 import { API_CREATE_CARD } from "../../config/API"
+
 import axios from "axios"
 
 const setting = {
@@ -20,6 +21,7 @@ const Card_detail = () => {
     const dispatch = useDispatch()
     const cardRef = useRef()
     const data = useSelector(state => state.CardDetailReducers)
+    const user = useSelector(state => state.auth.user)
 
     const [name, setName] = useState("")
     const [listmember, setListmember] = useState([])
@@ -64,7 +66,9 @@ const Card_detail = () => {
             maker: listMaker,
             description: description,
             dealine: day || "Không có",
+            manager: data.infor.manager
         }
+
         axios({
             method: "POST",
             url: API_CREATE_CARD,
@@ -73,12 +77,28 @@ const Card_detail = () => {
         })
             .then((rs) => {
 
-                newCard.id = rs.data
+                newCard.id = rs.data.id
+                newCard.chatRoom = rs.data.chat
                 dispatch(activeCardDetail(
                     {
-                        active: false, column: { id: data.idColumn.id }, infor: {}, data: newCard
+                        active: false, column: { id: data.idColumn.id }, infor: {}, data: {
+                            ...newCard,
+                            state: "create"
+                        }
 
                     }))
+                const userMaker = listMaker.filter(item => item.id !== user.id)
+
+                if (userMaker.length !== 0) {
+                    socket.emit("Client_createCard", {
+                        user: userMaker, content: {
+                            manager: user.displayName,
+                            project: data.idColumn.name,
+                            nameCard: name,
+                            project: data.infor.name
+                        }
+                    })
+                }
                 setSelectDate("")
                 setListMaker([])
                 setName("")

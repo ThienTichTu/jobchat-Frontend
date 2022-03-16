@@ -1,10 +1,14 @@
+import { activeCardDetailUpdate } from "../../redux/action/Card_detail"
+import { useDispatch } from "react-redux"
 
-export default function Card({ data }) {
-
+export default function Card({ data, index }) {
+    const dispatch = useDispatch();
     const handleSenddetail = () => {
-        console.log(data)
+        dispatch(activeCardDetailUpdate({
+            card: data,
+            index: index
+        }))
     }
-
     return (
         <>
             <span
@@ -15,7 +19,7 @@ export default function Card({ data }) {
                 {
                     data.maker.map((item, index) =>
 
-                        <div className="kanban-card-img">
+                        <div key={index} className="kanban-card-img">
                             <img src={item.avatar} alt="" />
                         </div>
                     )

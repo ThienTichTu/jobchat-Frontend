@@ -7,6 +7,7 @@ import ChatRooms from './ChatRooms'
 import Togle from './togle';
 import ProjectManager from './ProjectManager'
 import CardDetailReducers from "./CardDetailReducers"
+import CardDetailUpdate from "./CardDetailUpdate"
 import { combineReducers } from "redux";
 const rootReducers = combineReducers({
     Card: CardDetailReducers,
@@ -17,7 +18,8 @@ const rootReducers = combineReducers({
     togle: Togle,
     ChatRooms: ChatRooms,
     ProjectManager: ProjectManager,
-    CardDetailReducers: CardDetailReducers
+    CardDetailReducers: CardDetailReducers,
+    CardDetailUpdate: CardDetailUpdate
 
 });
 export default rootReducers;

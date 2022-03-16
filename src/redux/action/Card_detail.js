@@ -18,3 +18,15 @@ export const activeCardDetail = detail => {
         payload: detail,
     }
 }
+export const closeCardDetailUpdate = detail => {
+    return {
+        type: "CLOSE_CARD_DETAIL_UPDATE",
+        payload: detail,
+    }
+}
+export const activeCardDetailUpdate = detail => {
+    return {
+        type: "ACTIVE_CARD_DETAIL_UPDATE",
+        payload: detail,
+    }
+}

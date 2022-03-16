@@ -30,6 +30,7 @@ export default function Colum({ column, id }) {
                                                         >
                                                             <Card
                                                                 data={item}
+                                                                index={index}
                                                             />
                                                         </div>
 

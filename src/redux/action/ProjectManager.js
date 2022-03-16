@@ -16,3 +16,10 @@ export const pushProject = (detail) => {
         payload: detail
     }
 }
+
+export const setProjectMember = (detail) => {
+    return {
+        type: "SET_PROJECT_MEMBERS",
+        payload: detail
+    }
+}

@@ -13,6 +13,7 @@ import Profile from '../component/workspace/Profile'
 import ProjectManager from '../component/projectManager/ProjectManager'
 import Card_detail from '../component/Cardetail/Card_detail'
 import ToastDelete from "../component/toastMessage/ToastDelete"
+import Card_detail_update from "../component/Cardetail/Card_detail_update"
 import { socket } from '../config/Socketio'
 import { useSelector } from 'react-redux';
 
@@ -46,6 +47,7 @@ export default function Mainboard() {
                     <ToastDelete />
                     <Header />
                     <Navigation />
+                    <Card_detail_update />
                     <Card_detail />
                     <ProjectManager />
 

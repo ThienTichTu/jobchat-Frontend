@@ -38,7 +38,7 @@ export default function MessSocket() {
                 withCredentials: true,
             })
                 .then(rs => {
-                    console.log(rs.data)
+                    rs.data.reverse()
                     setMessArray([...rs.data])
                 })
                 .catch(err => console.log(err))

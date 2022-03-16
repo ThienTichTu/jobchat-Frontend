@@ -1,7 +1,7 @@
 export const initState = {
     active: false,
     id: "",
-
+    Members: []
 }
 
 const ProjectManager = (state = initState, action) => {
@@ -10,6 +10,7 @@ const ProjectManager = (state = initState, action) => {
 
             return {
                 ...state,
+                Members: [],
                 active: action.payload
             };
         }
@@ -21,11 +22,12 @@ const ProjectManager = (state = initState, action) => {
             };
         }
 
-        case "SET_PROJECT": {
+
+        case "SET_PROJECT_MEMBERS": {
 
             return {
                 ...state,
-                push: action.payload
+                Members: action.payload
             };
         }
         default: {
